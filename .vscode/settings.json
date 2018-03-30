@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "*.metadata": true, 
+        "*.settings": true,        
+        "**/*.pyc": true,
+    },
+    "python.pythonPath": "/usr/bin/python"
+}

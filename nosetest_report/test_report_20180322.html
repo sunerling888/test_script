@@ -1,0 +1,808 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>测试报告</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <meta name="author" content="Oleksii Skliarov, Ivan Lysenko, wangmy"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css" media="screen">
+        body        { font-family: verdana, arial, helvetica, sans-serif; width: 80%;margin: auto;}
+        table       { font-size: 100%; }
+        pre         { }
+
+        /* -- heading ---------------------------------------------------------------------- */
+        h1 {
+            font-size: 16pt;
+            color: gray;
+        }
+        .heading {
+            margin-top: 0ex;
+            margin-bottom: 1ex;
+        }
+
+        .heading .attribute {
+            margin-top: 1ex;
+            margin-bottom: 0;
+        }
+
+        .heading .description {
+            margin-top: 4ex;
+            margin-bottom: 6ex;
+        }
+
+        /* -- css div popup ------------------------------------------------------------------------ */
+        a.popup_link {
+        }
+
+        a.popup_link:hover {
+            color: red;
+        }
+
+        .popup_window {
+            display: none;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            /*border: solid #627173 1px; */
+            padding: 8px;
+            background-color: #E6E6D6;
+            font-family: "Lucida Console", "Courier New", Courier, monospace;
+            text-align: left;
+            font-size: 8pt;
+            width: 570px;
+        }
+
+        }
+        /* -- report ------------------------------------------------------------------------ */
+        #show_detail_line {
+            margin-top: 3ex;
+            margin-bottom: 1ex;
+        }
+        .result_table {
+            width: 80%;
+            border-collapse: collapse;
+            border: 1px solid #777;
+        }
+        #header_row {
+            font-weight: bold;
+            color: white;
+            background-color: #777;
+        }
+        .result_table td {
+            border: 1px solid #777;
+            padding: 2px;
+        }
+        .shortDescription {
+            font-style: italic;
+            font-weight: normal;
+        }
+        #total_row  { font-weight: bold; }
+        .passClass  { background-color: #6c6; }
+        .failClass  { background-color: #c60; }
+        .errorClass { background-color: #c00; }
+        .passCase   { color: #6c6; }
+        .failCase   { color: #c60; font-weight: bold; }
+        .errorCase  { color: #c00; font-weight: bold; }
+        .hiddenRow  { display: none; }
+
+        .testcase   { display: none; }
+		.testclass.active ~ .testcase { display: table-row; }
+
+        /* -- ending ---------------------------------------------------------------------- */
+        #ending {
+        }
+
+    </style>
+</head>
+<body>
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByClassName("testclass");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        if(0==level && tr.className.indexOf("active") != -1){
+			tr.className = tr.className.replace("active", "").replace("  ", " ").trim();
+		}else if (2 == level && tr.className.indexOf("active") == -1){
+			tr.className+=" active";
+		}else if (1 == level){
+			if(tr.className.indexOf("passClass") != -1){
+				if(tr.className.indexOf("active") != -1){
+					tr.className = tr.className.replace("active", "").replace("  ", " ").trim();
+				}
+			}else if (tr.className.indexOf("active") == -1){
+				tr.className+=" active";
+			}
+        }
+    }
+}
+
+function showClassDetail(element) {
+    var currentClassValue = element.className || "";
+
+    if (currentClassValue.indexOf("active") == -1) {
+		currentClassValue += " active";
+    } else {
+		currentClassValue = currentClassValue.replace("active", "").replace("  ", " ");
+	}
+	element.className = currentClassValue.trim();
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+function togleClass(element, clas){
+        var currentClassValue = element.className || "";
+
+        if (currentClassValue.indexOf(clas) == -1) {
+            currentClassValue += " "+clas;
+        } else {
+            currentClassValue = currentClassValue.replace(clas, "").replace("  ", " ");
+        }
+        element.className = currentClassValue.trim()
+    }
+
+function showRawLog(element){
+        togleClass(element, "popup_window")
+    }
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+</script>
+<div class="page-header">
+   <h1>测试报告</h1>
+</div>
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">
+         测试概况
+      </h3>
+   </div>
+   <div class="panel-body">
+      <p><strong>开始时间：</strong></p>
+      <p><strong>耗时：</strong></p>
+      <p><strong>总共：12</strong>，通过：12，失败：0，错误：0，跳过：0</p>
+   </div>
+</div>
+
+<!-- test list -->
+<!-- header -->
+<div class="page-header">
+   <h4>用例执行详情</h4>
+</div>
+<ul class="nav nav-pills">
+   <li><a href='javascript:showCase(0)'>测试用例组</a></li>
+   <li><a href='javascript:showCase(1)'>失败的测试</a></li>
+   <li><a href='javascript:showCase(2)'>所有的测试</a></li>
+</ul>
+<table class='table'>
+    <colgroup>
+        <col align='left' width="50%" />
+        <col align='right' width="10%"/>
+        <col align='right' width="10%"/>
+        <col align='right' width="10%"/>
+        <col align='right' width="10%"/>
+        <col align='right' width="10%"/>
+    </colgroup>
+    <tr id='header_row'>
+        <td>测试用例组</td>
+        <td>总数</td>
+        <td>通过</td>
+        <td>失败</td>
+        <td>错误</td>
+        <td>详情</td>
+    </tr>
+</table>
+<!-- for every test suite -->
+    <table class='table table-bordered'>
+	    <colgroup>
+            <col align='left' width="50%" />
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+        </colgroup>
+        <tr class='testclass passClass'>
+            <td>test_case.test_case_login_getPageFirst_loginout.homePage</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td><a href="javascript:void(0)" onclick="showClassDetail(this.parentNode.parentNode)">日志</a></td>
+        </tr>
+        <!-- for every test -->
+
+<tr id='test_case.test_case_login_getPageFirst_loginout.homePagetest_01_seller_pageFirst' class='testcase'>
+            <td class="passCase">
+                test_01_seller_pageFirst
+            </td>
+            <td>0:00:01.045756</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getPageFirst_loginout.homePagetest_01_seller_pageFirst')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getPageFirst_loginout.homePagetest_01_seller_pageFirst' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getPageFirst_loginout.homePagetest_01_seller_pageFirst').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=======测试开始======
+卖家身份: 登录 -> 首页(首页第一屏、首页搜索、首页菜单、首页猜你喜欢) -> 退出登录
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/login][device_token=&sort=1&h5Platform=1&pageSize=10&format=json&sign=E73A7BE676E9246186B90575324EBCC2&pageIndex=1&wh=750_1334&sess_key=&expect=true&osv=web_h5_%2A_%2A&password=aaaaaa&shop_url=http%3A%2F%2Fbravetime.davdian.com&mobile=18600967174&ts=1511242550937&q=%E5%9B%BE%E4%B9%A6&data_version=0]
+DEBUG	[ccd1ea5790fb6a3ba1894a965339c6f401be6a43][http://18600967174.davdian.com]
+首页第一屏
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=ccd1ea5790fb6a3ba1894a965339c6f401be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=32140D8E4317D30B57B50191815C14C3&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ccd1ea5790fb6a3ba1894a965339c6f401be6a43][http://18600967174.davdian.com]
+首页搜索
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/index/getSearch][device_token=&data_version=0&sess_key=ccd1ea5790fb6a3ba1894a965339c6f401be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=32140D8E4317D30B57B50191815C14C3&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ccd1ea5790fb6a3ba1894a965339c6f401be6a43][http://18600967174.davdian.com]
+首页菜单
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/index/getMenu][device_token=&data_version=0&sess_key=ccd1ea5790fb6a3ba1894a965339c6f401be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=32140D8E4317D30B57B50191815C14C3&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ccd1ea5790fb6a3ba1894a965339c6f401be6a43][http://18600967174.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=ccd1ea5790fb6a3ba1894a965339c6f401be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=32140D8E4317D30B57B50191815C14C3&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ccd1ea5790fb6a3ba1894a965339c6f401be6a43][http://18600967174.davdian.com]
+=======测试结束======
+DEBUG	[http://18600967174.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=ccd1ea5790fb6a3ba1894a965339c6f401be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=32140D8E4317D30B57B50191815C14C3&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[8f1a3ef477ab602be0865c852b27d76e00000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>
+<tr id='test_case.test_case_login_getPageFirst_loginout.homePagetest_02_user_pageFirst' class='testcase'>
+            <td class="passCase">
+                test_02_user_pageFirst
+            </td>
+            <td>0:00:00.706047</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getPageFirst_loginout.homePagetest_02_user_pageFirst')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getPageFirst_loginout.homePagetest_02_user_pageFirst' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getPageFirst_loginout.homePagetest_02_user_pageFirst').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=======测试开始======
+买家身份: 登录 -> 首页(首页第一屏、首页搜索、首页菜单、首页猜你喜欢) -> 退出登录
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/login][device_token=&sort=1&h5Platform=0&pageSize=10&format=json&sign=CB4EAA5CD0A0B73B4BE925933C4D3E4B&pageIndex=2&wh=750_1334&sess_key=&expect=false&osv=web_h5_%2A_%2A&password=111111&shop_url=http%3A%2F%2Fbravetime.davdian.com&mobile=18600960009&ts=1511242550937&q=123&data_version=0]
+DEBUG	[44e0413851d5ee5e9a59a9adec58c1fc01d3cc81][http://yiranmami.davdian.com]
+首页第一屏
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=44e0413851d5ee5e9a59a9adec58c1fc01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=A3C9BC0D54EF364A274C26D3EE1AD0E1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[44e0413851d5ee5e9a59a9adec58c1fc01d3cc81][http://yiranmami.davdian.com]
+首页搜索
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/index/getSearch][device_token=&data_version=0&sess_key=44e0413851d5ee5e9a59a9adec58c1fc01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=A3C9BC0D54EF364A274C26D3EE1AD0E1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[44e0413851d5ee5e9a59a9adec58c1fc01d3cc81][http://yiranmami.davdian.com]
+首页菜单
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/index/getMenu][device_token=&data_version=0&sess_key=44e0413851d5ee5e9a59a9adec58c1fc01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=A3C9BC0D54EF364A274C26D3EE1AD0E1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[44e0413851d5ee5e9a59a9adec58c1fc01d3cc81][http://yiranmami.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=44e0413851d5ee5e9a59a9adec58c1fc01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=A3C9BC0D54EF364A274C26D3EE1AD0E1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[44e0413851d5ee5e9a59a9adec58c1fc01d3cc81][http://yiranmami.davdian.com]
+=======测试结束======
+DEBUG	[http://yiranmami.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=44e0413851d5ee5e9a59a9adec58c1fc01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=A3C9BC0D54EF364A274C26D3EE1AD0E1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[1d99c8fdd1d703460e90283692d74d0d00000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>
+<tr id='test_case.test_case_login_getPageFirst_loginout.homePagetest_03_no_pageFirst' class='testcase'>
+            <td class="passCase">
+                test_03_no_pageFirst
+            </td>
+            <td>0:00:00.813899</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getPageFirst_loginout.homePagetest_03_no_pageFirst')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getPageFirst_loginout.homePagetest_03_no_pageFirst' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getPageFirst_loginout.homePagetest_03_no_pageFirst').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=======测试开始======
+游客身份: 登录 -> 首页(首页第一屏、首页搜索、首页菜单、首页猜你喜欢) -> 退出登录
+首页第一屏
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=116F58A8B4A652AEBAA02362515B76BF&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ad23993a987773c62f7c3b00b629e3c600000001][http://bravetime.davdian.com]
+首页搜索
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/index/getSearch][device_token=&data_version=0&sess_key=ad23993a987773c62f7c3b00b629e3c600000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=3D8FA45D5953772C6AD164C7F93476AB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ad23993a987773c62f7c3b00b629e3c600000001][http://bravetime.davdian.com]
+首页菜单
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/index/getMenu][device_token=&data_version=0&sess_key=ad23993a987773c62f7c3b00b629e3c600000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=3D8FA45D5953772C6AD164C7F93476AB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ad23993a987773c62f7c3b00b629e3c600000001][http://bravetime.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=ad23993a987773c62f7c3b00b629e3c600000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=3D8FA45D5953772C6AD164C7F93476AB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ad23993a987773c62f7c3b00b629e3c600000001][http://bravetime.davdian.com]
+=======测试结束======
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=ad23993a987773c62f7c3b00b629e3c600000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=3D8FA45D5953772C6AD164C7F93476AB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ad23993a987773c62f7c3b00b629e3c600000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>    <table class='table table-bordered'>
+	    <colgroup>
+            <col align='left' width="50%" />
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+        </colgroup>
+        <tr class='testclass passClass'>
+            <td>test_case.test_case_login_getChannel_loginout.getChannel</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td><a href="javascript:void(0)" onclick="showClassDetail(this.parentNode.parentNode)">日志</a></td>
+        </tr>
+        <!-- for every test -->
+
+<tr id='test_case.test_case_login_getChannel_loginout.getChanneltest_01_seller_getChannel' class='testcase'>
+            <td class="passCase">
+                test_01_seller_getChannel
+            </td>
+            <td>0:00:00.898234</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getChannel_loginout.getChanneltest_01_seller_getChannel')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getChannel_loginout.getChanneltest_01_seller_getChannel' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getChannel_loginout.getChanneltest_01_seller_getChannel').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>-----测试开始------
+卖家身份:登录 -> 首页（第一屏、猜你喜欢） -> 二级菜单(第一屏、猜你喜欢) -> 退出登录
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/login][device_token=&sort=1&h5Platform=1&pageSize=10&format=json&sign=E73A7BE676E9246186B90575324EBCC2&pageIndex=1&wh=750_1334&sess_key=&expect=true&osv=web_h5_%2A_%2A&password=aaaaaa&shop_url=http%3A%2F%2Fbravetime.davdian.com&mobile=18600967174&ts=1511242550937&q=%E5%9B%BE%E4%B9%A6&data_version=0]
+DEBUG	[728f29ee08545e72f1017a82653af17f01be6a43][http://18600967174.davdian.com]
+首页第一屏
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=728f29ee08545e72f1017a82653af17f01be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=F7A394BEA18F68BA0F46FC83B4B4E252&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[728f29ee08545e72f1017a82653af17f01be6a43][http://18600967174.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=728f29ee08545e72f1017a82653af17f01be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=F7A394BEA18F68BA0F46FC83B4B4E252&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[728f29ee08545e72f1017a82653af17f01be6a43][http://18600967174.davdian.com]
+二级页第一屏
+{'menuId': '3', 'pageIndex': '1'}
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/channel/getPageFirst][device_token=&data_version=0&sess_key=728f29ee08545e72f1017a82653af17f01be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&menuId=3&wh=750_1334&sign=BA3F8DE90902FC22C12C91A0BDAF4460&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[728f29ee08545e72f1017a82653af17f01be6a43][http://18600967174.davdian.com]
+二级页猜你喜欢
+{'menuId': '3', 'pageIndex': '1'}
+REQUEST PAGE 1
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/channel/getGuessBody][device_token=&pageIndex=1&format=json&menuId=3&wh=750_1334&sess_key=728f29ee08545e72f1017a82653af17f01be6a43&sign=0F2577B8471AD34704F684C8FF4B727D&shop_url=http%3A%2F%2F18600967174.davdian.com&osv=web_h5_%2A_%2A&ts=1511242550937&data_version=0]
+DEBUG	[728f29ee08545e72f1017a82653af17f01be6a43][http://18600967174.davdian.com]
+('lastPage', 0)
+-----测试结束------
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>
+<tr id='test_case.test_case_login_getChannel_loginout.getChanneltest_02_user_getChannel' class='testcase'>
+            <td class="passCase">
+                test_02_user_getChannel
+            </td>
+            <td>0:00:00.853066</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getChannel_loginout.getChanneltest_02_user_getChannel')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getChannel_loginout.getChanneltest_02_user_getChannel' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getChannel_loginout.getChanneltest_02_user_getChannel').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>-----测试开始------
+买家身份:登录 -> 首页（第一屏、猜你喜欢） -> 二级菜单(第一屏、猜你喜欢) -> 退出登录
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/login][device_token=&sort=1&h5Platform=0&pageSize=10&format=json&sign=CB4EAA5CD0A0B73B4BE925933C4D3E4B&pageIndex=2&wh=750_1334&sess_key=&expect=false&osv=web_h5_%2A_%2A&password=111111&shop_url=http%3A%2F%2Fbravetime.davdian.com&mobile=18600960009&ts=1511242550937&q=123&data_version=0]
+DEBUG	[3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81][http://yiranmami.davdian.com]
+首页第一屏
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=765A829CE39D87321939E3ECAA634D95&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81][http://yiranmami.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=765A829CE39D87321939E3ECAA634D95&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81][http://yiranmami.davdian.com]
+二级页第一屏
+{'menuId': '0000000001', 'pageIndex': '1'}
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/channel/getPageFirst][device_token=&data_version=0&sess_key=3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&menuId=0000000001&wh=750_1334&sign=26B1DE20ABDB6FC23F14BA5A7C06EA2B&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81][http://yiranmami.davdian.com]
+二级页猜你喜欢
+{'menuId': '0000000001', 'pageIndex': '1'}
+REQUEST PAGE 1
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/channel/getGuessBody][device_token=&pageIndex=1&format=json&menuId=0000000001&wh=750_1334&sess_key=3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81&sign=FF856F535C4811A77FF4171190344DBE&shop_url=http%3A%2F%2Fyiranmami.davdian.com&osv=web_h5_%2A_%2A&ts=1511242550937&data_version=0]
+DEBUG	[3ce9bc06a3faa69cfb7b4ca984308c4e01d3cc81][http://yiranmami.davdian.com]
+('lastPage', 0)
+-----测试结束------
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>
+<tr id='test_case.test_case_login_getChannel_loginout.getChanneltest_03_no_getChannel' class='testcase'>
+            <td class="passCase">
+                test_03_no_getChannel
+            </td>
+            <td>0:00:00.585433</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getChannel_loginout.getChanneltest_03_no_getChannel')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getChannel_loginout.getChanneltest_03_no_getChannel' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getChannel_loginout.getChanneltest_03_no_getChannel').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>-----测试开始------
+游客身份:登录 -> 首页（第一屏、猜你喜欢） -> 二级菜单(第一屏、猜你喜欢) -> 退出登录
+首页第一屏
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=116F58A8B4A652AEBAA02362515B76BF&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[0fc2a72b49336d7967aca9a37579912500000001][http://bravetime.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=0fc2a72b49336d7967aca9a37579912500000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=0C1379A19EDFCFBD29DC9D56BF88323B&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[0fc2a72b49336d7967aca9a37579912500000001][http://bravetime.davdian.com]
+二级页第一屏
+{'menuId': '10', 'pageIndex': '1'}
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/channel/getPageFirst][device_token=&data_version=0&sess_key=0fc2a72b49336d7967aca9a37579912500000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&menuId=10&wh=750_1334&sign=982DAA79024A58866E040ADDA5F70CE5&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[0fc2a72b49336d7967aca9a37579912500000001][http://bravetime.davdian.com]
+二级页猜你喜欢
+{'menuId': '10', 'pageIndex': '1'}
+REQUEST PAGE 1
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/channel/getGuessBody][device_token=&pageIndex=1&format=json&menuId=10&wh=750_1334&sess_key=0fc2a72b49336d7967aca9a37579912500000001&sign=3DB1BBE04B4C7385AF3373CACE428BD9&shop_url=http%3A%2F%2Fbravetime.davdian.com&osv=web_h5_%2A_%2A&ts=1511242550937&data_version=0]
+DEBUG	[0fc2a72b49336d7967aca9a37579912500000001][http://bravetime.davdian.com]
+('lastPage', 0)
+-----测试结束------
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>    <table class='table table-bordered'>
+	    <colgroup>
+            <col align='left' width="50%" />
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+        </colgroup>
+        <tr class='testclass passClass'>
+            <td>test_case.test_case_login_getSearch_loginout.Search</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td><a href="javascript:void(0)" onclick="showClassDetail(this.parentNode.parentNode)">日志</a></td>
+        </tr>
+        <!-- for every test -->
+
+<tr id='test_case.test_case_login_getSearch_loginout.Searchtest_01_seller_Search' class='testcase'>
+            <td class="passCase">
+                test_01_seller_Search
+            </td>
+            <td>0:00:00.952305</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getSearch_loginout.Searchtest_01_seller_Search')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getSearch_loginout.Searchtest_01_seller_Search' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getSearch_loginout.Searchtest_01_seller_Search').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=====测试开始=====
+卖家身份: 登录 -> 首页(第一屏,第二屏[猜你喜欢]) -> 搜索建议词 -> 搜索热词 -> 搜索结果 -> 退出登录
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/login][device_token=&sort=1&h5Platform=1&pageSize=10&format=json&sign=E73A7BE676E9246186B90575324EBCC2&pageIndex=1&wh=750_1334&sess_key=&expect=true&osv=web_h5_%2A_%2A&password=aaaaaa&shop_url=http%3A%2F%2Fbravetime.davdian.com&mobile=18600967174&ts=1511242550937&q=%E5%9B%BE%E4%B9%A6&data_version=0]
+DEBUG	[b68bdb3228306cea8e298056213b216901be6a43][http://18600967174.davdian.com]
+首页第一屏
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=b68bdb3228306cea8e298056213b216901be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=D1520D7E6F660C486FEA1BC0B5E5AEEB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[b68bdb3228306cea8e298056213b216901be6a43][http://18600967174.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=b68bdb3228306cea8e298056213b216901be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=D1520D7E6F660C486FEA1BC0B5E5AEEB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[b68bdb3228306cea8e298056213b216901be6a43][http://18600967174.davdian.com]
+搜索建议词
+{'sort': '1', 'h5Platform': '1', 'pageSize': '10', 'pageIndex': '3', 'q': '\xe8\xa1\xa3\xe6\x9c\x8d+abc', 'expect': 'ture'}
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/search/suggestKeywords][device_token=&data_version=0&sess_key=b68bdb3228306cea8e298056213b216901be6a43&q=%E8%A1%A3%E6%9C%8D%2Babc&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=CD90A733D907D822989478353EA5C675&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[b68bdb3228306cea8e298056213b216901be6a43][http://18600967174.davdian.com]
+搜索热词
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/search/getHotwords][device_token=&data_version=0&sess_key=b68bdb3228306cea8e298056213b216901be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=D1520D7E6F660C486FEA1BC0B5E5AEEB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[b68bdb3228306cea8e298056213b216901be6a43][http://18600967174.davdian.com]
+搜索结果
+DEBUG	[http://18600967174.davdian.com/api/mg/sale/search/getGoods][device_token=&data_version=0&sess_key=b68bdb3228306cea8e298056213b216901be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=D1520D7E6F660C486FEA1BC0B5E5AEEB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[b68bdb3228306cea8e298056213b216901be6a43][http://18600967174.davdian.com]
+=====测试结束=====
+DEBUG	[http://18600967174.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=b68bdb3228306cea8e298056213b216901be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=D1520D7E6F660C486FEA1BC0B5E5AEEB&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[4d91da49d1439ac0563dde331c649a9700000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>
+<tr id='test_case.test_case_login_getSearch_loginout.Searchtest_02_user_Search' class='testcase'>
+            <td class="passCase">
+                test_02_user_Search
+            </td>
+            <td>0:00:01.181483</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getSearch_loginout.Searchtest_02_user_Search')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getSearch_loginout.Searchtest_02_user_Search' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getSearch_loginout.Searchtest_02_user_Search').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=====测试开始=====
+买家身份: 登录 -> 首页(第一屏,第二屏[猜你喜欢]) -> 搜索建议词 -> 搜索热词 -> 搜索结果 -> 退出登录
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/login][device_token=&sort=1&h5Platform=0&pageSize=10&format=json&sign=CB4EAA5CD0A0B73B4BE925933C4D3E4B&pageIndex=2&wh=750_1334&sess_key=&expect=false&osv=web_h5_%2A_%2A&password=111111&shop_url=http%3A%2F%2Fbravetime.davdian.com&mobile=18600960009&ts=1511242550937&q=123&data_version=0]
+DEBUG	[fb4ab615a9956867ad81117292cda00501d3cc81][http://yiranmami.davdian.com]
+首页第一屏
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=fb4ab615a9956867ad81117292cda00501d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=EF5266B48E60AF6169C77FBA2FF89586&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[fb4ab615a9956867ad81117292cda00501d3cc81][http://yiranmami.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=fb4ab615a9956867ad81117292cda00501d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=EF5266B48E60AF6169C77FBA2FF89586&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[fb4ab615a9956867ad81117292cda00501d3cc81][http://yiranmami.davdian.com]
+搜索建议词
+{'sort': '1', 'h5Platform': '1', 'pageSize': '10', 'pageIndex': '1', 'q': '!asdfqw_888', 'expect': 'false'}
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/search/suggestKeywords][device_token=&data_version=0&sess_key=fb4ab615a9956867ad81117292cda00501d3cc81&q=%21asdfqw_888&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=A94C3AFF93F4F7E9DEBCBCCFFF9989BC&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[fb4ab615a9956867ad81117292cda00501d3cc81][http://yiranmami.davdian.com]
+搜索热词
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/search/getHotwords][device_token=&data_version=0&sess_key=fb4ab615a9956867ad81117292cda00501d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=EF5266B48E60AF6169C77FBA2FF89586&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[fb4ab615a9956867ad81117292cda00501d3cc81][http://yiranmami.davdian.com]
+搜索结果
+DEBUG	[http://yiranmami.davdian.com/api/mg/sale/search/getGoods][device_token=&data_version=0&sess_key=fb4ab615a9956867ad81117292cda00501d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=EF5266B48E60AF6169C77FBA2FF89586&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[fb4ab615a9956867ad81117292cda00501d3cc81][http://yiranmami.davdian.com]
+=====测试结束=====
+DEBUG	[http://yiranmami.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=fb4ab615a9956867ad81117292cda00501d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=EF5266B48E60AF6169C77FBA2FF89586&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[c42372d66be07d350ec56935f35dc2e300000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>
+<tr id='test_case.test_case_login_getSearch_loginout.Searchtest_03_no_Search' class='testcase'>
+            <td class="passCase">
+                test_03_no_Search
+            </td>
+            <td>0:00:01.085682</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_getSearch_loginout.Searchtest_03_no_Search')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_getSearch_loginout.Searchtest_03_no_Search' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_getSearch_loginout.Searchtest_03_no_Search').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=====测试开始=====
+游客身份: 未登录 -> 首页(第一屏,第二屏[猜你喜欢]) -> 搜索建议词 -> 搜索热词 -> 搜索结果 -> 退出登录
+首页第一屏
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/index/getPageFirst][device_token=&data_version=0&sess_key=&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=116F58A8B4A652AEBAA02362515B76BF&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[153a02a4f41035f4d2d50c41286f5f2600000001][http://bravetime.davdian.com]
+首页第二屏(猜你喜欢)
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/index/getPageSecond][device_token=&data_version=0&sess_key=153a02a4f41035f4d2d50c41286f5f2600000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=507C3E9C460D86CAD2C3B9B84514DDD1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[153a02a4f41035f4d2d50c41286f5f2600000001][http://bravetime.davdian.com]
+搜索建议词
+{'sort': '1', 'h5Platform': '1', 'pageSize': '10', 'pageIndex': '4', 'q': '\xe4\xb9\xa61-3\xe5\xb2\x81', 'expect': 'ture'}
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/search/suggestKeywords][device_token=&data_version=0&sess_key=153a02a4f41035f4d2d50c41286f5f2600000001&q=%E4%B9%A61-3%E5%B2%81&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=0840BD7DBBDE8A45697366D078786B93&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[153a02a4f41035f4d2d50c41286f5f2600000001][http://bravetime.davdian.com]
+搜索热词
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/search/getHotwords][device_token=&data_version=0&sess_key=153a02a4f41035f4d2d50c41286f5f2600000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=507C3E9C460D86CAD2C3B9B84514DDD1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[153a02a4f41035f4d2d50c41286f5f2600000001][http://bravetime.davdian.com]
+搜索结果
+DEBUG	[http://bravetime.davdian.com/api/mg/sale/search/getGoods][device_token=&data_version=0&sess_key=153a02a4f41035f4d2d50c41286f5f2600000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=507C3E9C460D86CAD2C3B9B84514DDD1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[153a02a4f41035f4d2d50c41286f5f2600000001][http://bravetime.davdian.com]
+=====测试结束=====
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=153a02a4f41035f4d2d50c41286f5f2600000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=507C3E9C460D86CAD2C3B9B84514DDD1&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[153a02a4f41035f4d2d50c41286f5f2600000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>    <table class='table table-bordered'>
+	    <colgroup>
+            <col align='left' width="50%" />
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+            <col align='right' width="10%"/>
+        </colgroup>
+        <tr class='testclass passClass'>
+            <td>test_case.test_case_login_loginout.Login</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td><a href="javascript:void(0)" onclick="showClassDetail(this.parentNode.parentNode)">日志</a></td>
+        </tr>
+        <!-- for every test -->
+
+<tr id='test_case.test_case_login_loginout.Logintest_01_seller_setting' class='testcase'>
+            <td class="passCase">
+                test_01_seller_setting
+            </td>
+            <td>0:00:00.641606</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_loginout.Logintest_01_seller_setting')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_loginout.Logintest_01_seller_setting' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_loginout.Logintest_01_seller_setting').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=======测试开始======
+卖家身份: 登录 -> 个人中心 -> 设置页面 -> 退出登录
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/login][device_token=&sort=1&h5Platform=1&pageSize=10&format=json&sign=E73A7BE676E9246186B90575324EBCC2&pageIndex=1&wh=750_1334&sess_key=&expect=true&osv=web_h5_%2A_%2A&password=aaaaaa&shop_url=http%3A%2F%2Fbravetime.davdian.com&mobile=18600967174&ts=1511242550937&q=%E5%9B%BE%E4%B9%A6&data_version=0]
+DEBUG	[3a489da2ec24d4b74a774c43417fd9fd01be6a43][http://18600967174.davdian.com]
+个人中心接口
+DEBUG	[http://18600967174.davdian.com/api/mg/user/center/index][device_token=&data_version=0&sess_key=3a489da2ec24d4b74a774c43417fd9fd01be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=95F5C5FD4BAA1E0D7633BD9B1B2B1845&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[3a489da2ec24d4b74a774c43417fd9fd01be6a43][http://18600967174.davdian.com]
+设置页面
+DEBUG	[http://18600967174.davdian.com/settings.html][None]
+=======测试开始======
+DEBUG	[http://18600967174.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=3a489da2ec24d4b74a774c43417fd9fd01be6a43&shop_url=http%3A%2F%2F18600967174.davdian.com&format=json&wh=750_1334&sign=95F5C5FD4BAA1E0D7633BD9B1B2B1845&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[10e6bf02da882d690084fa7580aae4e700000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>
+<tr id='test_case.test_case_login_loginout.Logintest_02_user_setting' class='testcase'>
+            <td class="passCase">
+                test_02_user_setting
+            </td>
+            <td>0:00:00.716482</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_loginout.Logintest_02_user_setting')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_loginout.Logintest_02_user_setting' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_loginout.Logintest_02_user_setting').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=======测试开始======
+买家身份: 登录 -> 个人中心 -> 设置页面 -> 退出登录
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/login][device_token=&sort=1&h5Platform=0&pageSize=10&format=json&sign=CB4EAA5CD0A0B73B4BE925933C4D3E4B&pageIndex=2&wh=750_1334&sess_key=&expect=false&osv=web_h5_%2A_%2A&password=111111&shop_url=http%3A%2F%2Fbravetime.davdian.com&mobile=18600960009&ts=1511242550937&q=123&data_version=0]
+DEBUG	[dad596c2ed9378e7aee4d3fd8353cf4e01d3cc81][http://yiranmami.davdian.com]
+个人中心接口
+DEBUG	[http://yiranmami.davdian.com/api/mg/user/center/index][device_token=&data_version=0&sess_key=dad596c2ed9378e7aee4d3fd8353cf4e01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=5AB0CE7D07B5B3C0184E15FFBCFAB395&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[dad596c2ed9378e7aee4d3fd8353cf4e01d3cc81][http://yiranmami.davdian.com]
+设置页面
+DEBUG	[http://yiranmami.davdian.com/settings.html][None]
+=======测试开始======
+DEBUG	[http://yiranmami.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=dad596c2ed9378e7aee4d3fd8353cf4e01d3cc81&shop_url=http%3A%2F%2Fyiranmami.davdian.com&format=json&wh=750_1334&sign=5AB0CE7D07B5B3C0184E15FFBCFAB395&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[ec065dadbb50bf563dba2b898db2f71500000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr>
+<tr id='test_case.test_case_login_loginout.Logintest_03_no_setting' class='testcase'>
+            <td class="passCase">
+                test_03_no_setting
+            </td>
+            <td>0:00:00.267087</td>
+            <td colspan='4' align='center'>
+            <!--css div popup start-->
+            <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_test_case.test_case_login_loginout.Logintest_03_no_setting')" >
+                Pass
+            </a>
+
+            <div id='div_test_case.test_case_login_loginout.Logintest_03_no_setting' class="popup_window">
+                <div style='text-align: right; color:red; cursor:pointer;'>
+                <a onfocus='this.blur();' onclick="document.getElementById('div_test_case.test_case_login_loginout.Logintest_03_no_setting').style.display = 'none' " >
+                   [x]</a>
+                </div>
+                <pre>=======测试开始======
+游客身份: 登录 -> 个人中心 -> 设置页面 -> 退出登录
+个人中心接口
+DEBUG	[http://bravetime.davdian.com/api/mg/user/center/index][device_token=&data_version=0&sess_key=&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=116F58A8B4A652AEBAA02362515B76BF&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[6e3042e5dfa04b1a3e132bf005a5281700000001][http://bravetime.davdian.com]
+设置页面
+DEBUG	[http://bravetime.davdian.com/settings.html][None]
+=======测试开始======
+DEBUG	[http://bravetime.davdian.com/api/mg/auth/user/logout][device_token=&data_version=0&sess_key=6e3042e5dfa04b1a3e132bf005a5281700000001&shop_url=http%3A%2F%2Fbravetime.davdian.com&format=json&wh=750_1334&sign=00150F1AAA649E618B9B5E595D2C2DE8&ts=1511242550937&osv=web_h5_%2A_%2A]
+DEBUG	[6e3042e5dfa04b1a3e132bf005a5281700000001][http://bravetime.davdian.com]
+
+
+
+                </pre>
+            </div>
+            <!--css div popup end-->
+
+            </td>
+        </tr></table>
+</body>
+</html>

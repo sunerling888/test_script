@@ -1,0 +1,1110 @@
+你好
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/redis_info/redis_info_test.py", line 21, in <module>
+    release_info = json.loads(data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 338, in loads
+    return _default_decoder.decode(s)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 366, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 384, in raw_decode
+    raise ValueError("No JSON object could be decoded")
+ValueError: No JSON object could be decoded
+你好
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/redis_info/redis_info_test.py", line 21, in <module>
+    print release_info
+NameError: name 'release_info' is not defined
+你好
+你好
+你好
+你好
+你好
+你好
+你好
+你好
+你好
+......................
+----------------------------------------------------------------------
+Ran 22 tests in 20.423s
+
+OK
+<_csv.reader object at 0x1068441a0>
+<_csv.reader object at 0x106844280>
+<_csv.reader object at 0x106844280>
+<_csv.reader object at 0x106844280>
+<_csv.reader object at 0x106844280>
+<_csv.reader object at 0x106844280>
+<_csv.reader object at 0x106844280>
+<_csv.reader object at 0x106844280>
+<_csv.reader object at 0x106844520>
+<_csv.reader object at 0x106844520>
+<_csv.reader object at 0x106844590>
+<_csv.reader object at 0x106844590>
+0
+{"git_address": "http://yunwei:3oD22Ypw8C3V@gitlab-pri.rd.vyohui.com/php/seller.git", "release_flag": "False", "redmine_num": "15051", "module": "seller", "id": 105, "item": "php", "create_time": 1522295924, "user": "xukaiqiang", "branch": "test_int_xukq_from_master", "env_num": "18", "action": "\u63d0\u6d4b", "message": "[\u63d0\u6d4b][task][#15051][beta18]\u8fd9\u6b21\u662f\u4e00\u4e2a\u6d4b\u8bd5\u63a8\u9001\u7684\u6539\u52a8\u8bf7\u5ffd\u7565 [\u5f71\u54cd]\u5bf9\u4ee3\u7801\u6ca1\u6709\u4efb\u4f55\u5f71\u54cd\u4e5f\u7c73\u6709\u4efb\u4f55\u6539\u52a8\n", "type": "task", "email": "xukaiqiang@davdian.com", "env_flag": "beta"}
+..................E...
+======================================================================
+ERROR: test_01_seller_channel_goodsDetail (test_case.test_case_07_login_channel_goodsDetail_loginout.channel_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_07_login_channel_goodsDetail_loginout.py", line 41, in tearDown
+    self.session.api('/api/mg/auth/user/logout')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1197, in do_open
+    raise URLError(err)
+URLError: <urlopen error [Errno 60] Operation timed out>
+
+----------------------------------------------------------------------
+Ran 22 tests in 96.093s
+
+FAILED (errors=1)
+<_csv.reader object at 0x1059871a0>
+<_csv.reader object at 0x105987280>
+<_csv.reader object at 0x105987280>
+<_csv.reader object at 0x105987280>
+<_csv.reader object at 0x105987280>
+<_csv.reader object at 0x105987280>
+<_csv.reader object at 0x1059874b0>
+<_csv.reader object at 0x105987590>
+<_csv.reader object at 0x105987670>
+<_csv.reader object at 0x105987670>
+<_csv.reader object at 0x1059876e0>
+<_csv.reader object at 0x1059876e0>
+256
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 56.653s
+
+OK
+<_csv.reader object at 0x105927280>
+<_csv.reader object at 0x105927360>
+<_csv.reader object at 0x105927360>
+<_csv.reader object at 0x105927360>
+<_csv.reader object at 0x105927360>
+<_csv.reader object at 0x105927360>
+<_csv.reader object at 0x105927590>
+<_csv.reader object at 0x105927670>
+<_csv.reader object at 0x1059276e0>
+<_csv.reader object at 0x1059276e0>
+<_csv.reader object at 0x105927750>
+<_csv.reader object at 0x105927750>
+<_csv.reader object at 0x105927750>
+<_csv.reader object at 0x105927750>
+<_csv.reader object at 0x105927830>
+<_csv.reader object at 0x1059279f0>
+<_csv.reader object at 0x1059279f0>
+<_csv.reader object at 0x105927ad0>
+<_csv.reader object at 0x105927ad0>
+0
+*******接受************
+....E..................................
+======================================================================
+ERROR: test_02_user_pageFirst (test_case.test_case_02_login_getPageFirst_loginout.homePage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_02_login_getPageFirst_loginout.py", line 99, in test_02_user_pageFirst
+    ret = self.action_pageFirst()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_02_login_getPageFirst_loginout.py", line 80, in action_pageFirst
+    data = self.session.api('/api/mg/sale/index/getPageSecond')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1197, in do_open
+    raise URLError(err)
+URLError: <urlopen error [Errno 60] Operation timed out>
+
+----------------------------------------------------------------------
+Ran 39 tests in 118.633s
+
+FAILED (errors=1)
+<_csv.reader object at 0x109f37280>
+<_csv.reader object at 0x109f37360>
+<_csv.reader object at 0x109f37360>
+<_csv.reader object at 0x109f37360>
+<_csv.reader object at 0x109f37360>
+<_csv.reader object at 0x109f37360>
+<_csv.reader object at 0x109f37590>
+<_csv.reader object at 0x109f37670>
+<_csv.reader object at 0x109f376e0>
+<_csv.reader object at 0x109f376e0>
+<_csv.reader object at 0x109f37750>
+<_csv.reader object at 0x109f37750>
+<_csv.reader object at 0x109f37750>
+<_csv.reader object at 0x109f37750>
+<_csv.reader object at 0x109f37830>
+<_csv.reader object at 0x109f379f0>
+<_csv.reader object at 0x109f379f0>
+<_csv.reader object at 0x109f37ad0>
+<_csv.reader object at 0x109f37ad0>
+256
+*******接受************
+*******接受************
+............EE.........................
+======================================================================
+ERROR: test_01_seller_timeShop_goodsDetail (test_case.test_case_05_login_timeShop_goodsDetail_loginout.timeShop_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_05_login_timeShop_goodsDetail_loginout.py", line 94, in test_01_seller_timeShop_goodsDetail
+    ret = self.action_timeShop_goodsDetail()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_05_login_timeShop_goodsDetail_loginout.py", line 81, in action_timeShop_goodsDetail
+    data = self.session.api('/api/mg/good/info/detail', param)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1200, in do_open
+    r = h.getresponse(buffering=True)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 1132, in getresponse
+    response.begin()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 453, in begin
+    version, status, reason = self._read_status()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 409, in _read_status
+    line = self.fp.readline(_MAXLINE + 1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+timeout: timed out
+
+======================================================================
+ERROR: test_02_user_timeShop_goodsDetail (test_case.test_case_05_login_timeShop_goodsDetail_loginout.timeShop_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_05_login_timeShop_goodsDetail_loginout.py", line 102, in test_02_user_timeShop_goodsDetail
+    self.session.api('/api/mg/auth/user/login', user)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1197, in do_open
+    raise URLError(err)
+URLError: <urlopen error timed out>
+
+----------------------------------------------------------------------
+Ran 39 tests in 48.037s
+
+FAILED (errors=2)
+<_csv.reader object at 0x108b35210>
+<_csv.reader object at 0x108b352f0>
+<_csv.reader object at 0x108b352f0>
+<_csv.reader object at 0x108b352f0>
+<_csv.reader object at 0x108b352f0>
+<_csv.reader object at 0x108b352f0>
+<_csv.reader object at 0x108b35520>
+<_csv.reader object at 0x108b35600>
+<_csv.reader object at 0x108b35670>
+<_csv.reader object at 0x108b35670>
+<_csv.reader object at 0x108b356e0>
+<_csv.reader object at 0x108b356e0>
+<_csv.reader object at 0x108b356e0>
+<_csv.reader object at 0x108b356e0>
+<_csv.reader object at 0x108b357c0>
+<_csv.reader object at 0x108b35980>
+<_csv.reader object at 0x108b35980>
+<_csv.reader object at 0x108b35a60>
+<_csv.reader object at 0x108b35a60>
+256
+*******接受************
+*******接受************
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 41.532s
+
+OK
+<_csv.reader object at 0x10f03b210>
+<_csv.reader object at 0x10f03b2f0>
+<_csv.reader object at 0x10f03b2f0>
+<_csv.reader object at 0x10f03b2f0>
+<_csv.reader object at 0x10f03b2f0>
+<_csv.reader object at 0x10f03b2f0>
+<_csv.reader object at 0x10f03b520>
+<_csv.reader object at 0x10f03b600>
+<_csv.reader object at 0x10f03b670>
+<_csv.reader object at 0x10f03b670>
+<_csv.reader object at 0x10f03b6e0>
+<_csv.reader object at 0x10f03b6e0>
+<_csv.reader object at 0x10f03b6e0>
+<_csv.reader object at 0x10f03b6e0>
+<_csv.reader object at 0x10f03b7c0>
+<_csv.reader object at 0x10f03b980>
+<_csv.reader object at 0x10f03b980>
+<_csv.reader object at 0x10f03ba60>
+<_csv.reader object at 0x10f03ba60>
+0
+*******接受************
+.E.....................................
+======================================================================
+ERROR: test_02_user_setting (test_case.test_case_01_login_loginout.Login)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_01_login_loginout.py", line 97, in test_02_user_setting
+    ret = self.action_setting()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_01_login_loginout.py", line 75, in action_setting
+    response = self.session.get('/settings.html')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 46, in get
+    return self._request(uri, None)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1197, in do_open
+    raise URLError(err)
+URLError: <urlopen error timed out>
+
+----------------------------------------------------------------------
+Ran 39 tests in 39.665s
+
+FAILED (errors=1)
+<_csv.reader object at 0x10f212210>
+<_csv.reader object at 0x10f2122f0>
+<_csv.reader object at 0x10f2122f0>
+<_csv.reader object at 0x10f2122f0>
+<_csv.reader object at 0x10f2122f0>
+<_csv.reader object at 0x10f2122f0>
+<_csv.reader object at 0x10f212520>
+<_csv.reader object at 0x10f212600>
+<_csv.reader object at 0x10f212670>
+<_csv.reader object at 0x10f212670>
+<_csv.reader object at 0x10f2126e0>
+<_csv.reader object at 0x10f2126e0>
+<_csv.reader object at 0x10f2126e0>
+<_csv.reader object at 0x10f2126e0>
+<_csv.reader object at 0x10f2127c0>
+<_csv.reader object at 0x10f212980>
+<_csv.reader object at 0x10f212980>
+<_csv.reader object at 0x10f212a60>
+<_csv.reader object at 0x10f212a60>
+256
+*******接受************
+.....E................................E
+======================================================================
+ERROR: test_03_no_pageFirst (test_case.test_case_02_login_getPageFirst_loginout.homePage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_02_login_getPageFirst_loginout.py", line 106, in test_03_no_pageFirst
+    ret = self.action_pageFirst()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_02_login_getPageFirst_loginout.py", line 68, in action_pageFirst
+    data = self.session.api('/api/mg/sale/index/getSearch')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1197, in do_open
+    raise URLError(err)
+URLError: <urlopen error timed out>
+
+======================================================================
+ERROR: test_03_no_search_addCart (test_case.test_case_13_login_getSearch_goodsDetail_addCart_loginout.serach_addCart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_13_login_getSearch_goodsDetail_addCart_loginout.py", line 165, in test_03_no_search_addCart
+    ret = self.action_search_addCart(query)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_13_login_getSearch_goodsDetail_addCart_loginout.py", line 61, in action_search_addCart
+    data = self.session.api('/api/mg/sale/search/getGoods', param)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1200, in do_open
+    r = h.getresponse(buffering=True)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 1132, in getresponse
+    response.begin()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 453, in begin
+    version, status, reason = self._read_status()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 409, in _read_status
+    line = self.fp.readline(_MAXLINE + 1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+timeout: timed out
+
+----------------------------------------------------------------------
+Ran 39 tests in 35.868s
+
+FAILED (errors=2)
+<_csv.reader object at 0x106443210>
+<_csv.reader object at 0x1064432f0>
+<_csv.reader object at 0x1064432f0>
+<_csv.reader object at 0x1064432f0>
+<_csv.reader object at 0x1064432f0>
+<_csv.reader object at 0x1064432f0>
+<_csv.reader object at 0x106443520>
+<_csv.reader object at 0x106443600>
+<_csv.reader object at 0x106443670>
+<_csv.reader object at 0x106443670>
+<_csv.reader object at 0x1064436e0>
+<_csv.reader object at 0x1064436e0>
+<_csv.reader object at 0x1064436e0>
+<_csv.reader object at 0x1064436e0>
+<_csv.reader object at 0x1064437c0>
+<_csv.reader object at 0x106443980>
+<_csv.reader object at 0x106443980>
+<_csv.reader object at 0x106443a60>
+<_csv.reader object at 0x106443a60>
+256
+*******接受************
+..................................E....
+======================================================================
+ERROR: test_02_user_getCart (test_case.test_case_12_login_firstGuess_goodDetail_addCart_loginout.firstGuess_addCaet)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 198, in test_02_user_getCart
+    self.session.api('/api/mg/auth/user/login', user)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1200, in do_open
+    r = h.getresponse(buffering=True)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 1132, in getresponse
+    response.begin()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 453, in begin
+    version, status, reason = self._read_status()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 409, in _read_status
+    line = self.fp.readline(_MAXLINE + 1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+timeout: timed out
+
+----------------------------------------------------------------------
+Ran 39 tests in 37.122s
+
+FAILED (errors=1)
+<_csv.reader object at 0x108faf210>
+<_csv.reader object at 0x108faf2f0>
+<_csv.reader object at 0x108faf2f0>
+<_csv.reader object at 0x108faf2f0>
+<_csv.reader object at 0x108faf2f0>
+<_csv.reader object at 0x108faf2f0>
+<_csv.reader object at 0x108faf520>
+<_csv.reader object at 0x108faf600>
+<_csv.reader object at 0x108faf670>
+<_csv.reader object at 0x108faf670>
+<_csv.reader object at 0x108faf6e0>
+<_csv.reader object at 0x108faf6e0>
+<_csv.reader object at 0x108faf6e0>
+<_csv.reader object at 0x108faf6e0>
+<_csv.reader object at 0x108faf7c0>
+<_csv.reader object at 0x108faf980>
+<_csv.reader object at 0x108faf980>
+<_csv.reader object at 0x108fafa60>
+<_csv.reader object at 0x108fafa60>
+256
+......E..EE..E...E.....................
+======================================================================
+ERROR: test_01_seller_getChannel (test_case.test_case_03_login_getChannel_loginout.getChannel)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_03_login_getChannel_loginout.py", line 97, in test_01_seller_getChannel
+    ret = self.action_Channel(menu_id)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_03_login_getChannel_loginout.py", line 51, in action_Channel
+    data = self.session.api('/api/mg/sale/index/getPageSecond')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1197, in do_open
+    raise URLError(err)
+URLError: <urlopen error timed out>
+
+======================================================================
+ERROR: test_01_seller_Search (test_case.test_case_04_login_getSearch_loginout.Search)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_04_login_getSearch_loginout.py", line 36, in tearDown
+    self.session.api('/api/mg/auth/user/logout')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1200, in do_open
+    r = h.getresponse(buffering=True)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 1132, in getresponse
+    response.begin()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 453, in begin
+    version, status, reason = self._read_status()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 409, in _read_status
+    line = self.fp.readline(_MAXLINE + 1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+timeout: timed out
+
+======================================================================
+ERROR: test_02_user_Search (test_case.test_case_04_login_getSearch_loginout.Search)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_04_login_getSearch_loginout.py", line 114, in test_02_user_Search
+    ret = self.action_Search(query)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_04_login_getSearch_loginout.py", line 45, in action_Search
+    data = self.session.api('/api/mg/sale/index/getPageFirst')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1200, in do_open
+    r = h.getresponse(buffering=True)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 1132, in getresponse
+    response.begin()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 453, in begin
+    version, status, reason = self._read_status()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/httplib.py", line 409, in _read_status
+    line = self.fp.readline(_MAXLINE + 1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+timeout: timed out
+
+======================================================================
+ERROR: test_02_user_timeShop_goodsDetail (test_case.test_case_05_login_timeShop_goodsDetail_loginout.timeShop_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_05_login_timeShop_goodsDetail_loginout.py", line 39, in tearDown
+    self.session.api('/api/mg/auth/user/logout')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1197, in do_open
+    raise URLError(err)
+URLError: <urlopen error timed out>
+
+======================================================================
+ERROR: test_03_no_firstGuess_goodsDetail (test_case.test_case_06_login_firstGuess_goodsDetail_loginout.firstGuess_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_06_login_firstGuess_goodsDetail_loginout.py", line 120, in test_03_no_firstGuess_goodsDetail
+    ret = self.action_firstGuess_goodsDetail()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_06_login_firstGuess_goodsDetail_loginout.py", line 52, in action_firstGuess_goodsDetail
+    data = self.session.api('/api/mg/sale/index/getPageSecond')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 84, in _request
+    response = self.opener.open(url, data, timeout=1)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 431, in open
+    response = self._open(req, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 449, in _open
+    '_open', req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1227, in http_open
+    return self.do_open(httplib.HTTPConnection, req)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 1197, in do_open
+    raise URLError(err)
+URLError: <urlopen error timed out>
+
+----------------------------------------------------------------------
+Ran 39 tests in 44.548s
+
+FAILED (errors=5)
+<_csv.reader object at 0x1053f2210>
+<_csv.reader object at 0x1053f22f0>
+<_csv.reader object at 0x1053f22f0>
+<_csv.reader object at 0x1053f22f0>
+<_csv.reader object at 0x1053f22f0>
+<_csv.reader object at 0x1053f22f0>
+<_csv.reader object at 0x1053f2520>
+<_csv.reader object at 0x1053f2600>
+<_csv.reader object at 0x1053f2670>
+<_csv.reader object at 0x1053f2670>
+<_csv.reader object at 0x1053f26e0>
+<_csv.reader object at 0x1053f26e0>
+<_csv.reader object at 0x1053f26e0>
+<_csv.reader object at 0x1053f26e0>
+<_csv.reader object at 0x1053f27c0>
+<_csv.reader object at 0x1053f2980>
+<_csv.reader object at 0x1053f2980>
+<_csv.reader object at 0x1053f2a60>
+<_csv.reader object at 0x1053f2a60>
+256
+*******接受*******************接受************
+
+..................................F....
+======================================================================
+FAIL: test_02_user_getCart (test_case.test_case_12_login_firstGuess_goodDetail_addCart_loginout.firstGuess_addCaet)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 200, in test_02_user_getCart
+    ret = self.action_getCart()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 180, in action_getCart
+    self.assertTrue((new_goodsIds.get(goodsId, 0) - goodsIds.get(goodsId, 0))==1, u"商品数量不正确")
+AssertionError: 商品数量不正确
+
+----------------------------------------------------------------------
+Ran 39 tests in 39.081s
+
+FAILED (failures=1)
+<_csv.reader object at 0x10a169210>
+<_csv.reader object at 0x10a1692f0>
+<_csv.reader object at 0x10a1692f0>
+<_csv.reader object at 0x10a1692f0>
+<_csv.reader object at 0x10a1692f0>
+<_csv.reader object at 0x10a1692f0>
+<_csv.reader object at 0x10a169520>
+<_csv.reader object at 0x10a169600>
+<_csv.reader object at 0x10a169670>
+<_csv.reader object at 0x10a169670>
+<_csv.reader object at 0x10a1696e0>
+<_csv.reader object at 0x10a1696e0>
+<_csv.reader object at 0x10a1696e0>
+<_csv.reader object at 0x10a1696e0>
+<_csv.reader object at 0x10a1697c0>
+<_csv.reader object at 0x10a169980>
+<_csv.reader object at 0x10a169980>
+<_csv.reader object at 0x10a169a60>
+<_csv.reader object at 0x10a169a60>
+256
+.................................FF....
+======================================================================
+FAIL: test_01_seller_getCart (test_case.test_case_12_login_firstGuess_goodDetail_addCart_loginout.firstGuess_addCaet)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 191, in test_01_seller_getCart
+    ret = self.action_getCart()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 180, in action_getCart
+    self.assertTrue((new_goodsIds.get(goodsId, 0) - goodsIds.get(goodsId, 0))==1, u"商品数量不正确")
+AssertionError: 商品数量不正确
+
+======================================================================
+FAIL: test_02_user_getCart (test_case.test_case_12_login_firstGuess_goodDetail_addCart_loginout.firstGuess_addCaet)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 200, in test_02_user_getCart
+    ret = self.action_getCart()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 180, in action_getCart
+    self.assertTrue((new_goodsIds.get(goodsId, 0) - goodsIds.get(goodsId, 0))==1, u"商品数量不正确")
+AssertionError: 商品数量不正确
+
+----------------------------------------------------------------------
+Ran 39 tests in 39.607s
+
+FAILED (failures=2)
+<_csv.reader object at 0x10374a210>
+<_csv.reader object at 0x10374a2f0>
+<_csv.reader object at 0x10374a2f0>
+<_csv.reader object at 0x10374a2f0>
+<_csv.reader object at 0x10374a2f0>
+<_csv.reader object at 0x10374a2f0>
+<_csv.reader object at 0x10374a520>
+<_csv.reader object at 0x10374a600>
+<_csv.reader object at 0x10374a670>
+<_csv.reader object at 0x10374a670>
+<_csv.reader object at 0x10374a6e0>
+<_csv.reader object at 0x10374a6e0>
+<_csv.reader object at 0x10374a6e0>
+<_csv.reader object at 0x10374a6e0>
+<_csv.reader object at 0x10374a7c0>
+<_csv.reader object at 0x10374a980>
+<_csv.reader object at 0x10374a980>
+<_csv.reader object at 0x10374aa60>
+<_csv.reader object at 0x10374aa60>
+256
+*******接受************
+*******接受************
+
+...............E.................FF....
+======================================================================
+ERROR: test_01_seller_firstGuess_goodsDetail (test_case.test_case_06_login_firstGuess_goodsDetail_loginout.firstGuess_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_06_login_firstGuess_goodsDetail_loginout.py", line 102, in test_01_seller_firstGuess_goodsDetail
+    ret = self.action_firstGuess_goodsDetail()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_06_login_firstGuess_goodsDetail_loginout.py", line 91, in action_firstGuess_goodsDetail
+    data = self.session.api('/api/mg/good/info/detail', param)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 88, in _request
+    if not response:
+UnboundLocalError: local variable 'response' referenced before assignment
+
+======================================================================
+FAIL: test_01_seller_getCart (test_case.test_case_12_login_firstGuess_goodDetail_addCart_loginout.firstGuess_addCaet)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 191, in test_01_seller_getCart
+    ret = self.action_getCart()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 180, in action_getCart
+    self.assertTrue((new_goodsIds.get(goodsId, 0) - goodsIds.get(goodsId, 0))==1, u"商品数量不正确")
+AssertionError: 商品数量不正确
+
+======================================================================
+FAIL: test_02_user_getCart (test_case.test_case_12_login_firstGuess_goodDetail_addCart_loginout.firstGuess_addCaet)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 200, in test_02_user_getCart
+    ret = self.action_getCart()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 180, in action_getCart
+    self.assertTrue((new_goodsIds.get(goodsId, 0) - goodsIds.get(goodsId, 0))==1, u"商品数量不正确")
+AssertionError: 商品数量不正确
+
+----------------------------------------------------------------------
+Ran 39 tests in 39.217s
+
+FAILED (errors=1, failures=2)
+<_csv.reader object at 0x10df7b210>
+<_csv.reader object at 0x10df7b2f0>
+<_csv.reader object at 0x10df7b2f0>
+<_csv.reader object at 0x10df7b2f0>
+<_csv.reader object at 0x10df7b2f0>
+<_csv.reader object at 0x10df7b2f0>
+<_csv.reader object at 0x10df7b520>
+<_csv.reader object at 0x10df7b600>
+<_csv.reader object at 0x10df7b670>
+<_csv.reader object at 0x10df7b670>
+<_csv.reader object at 0x10df7b6e0>
+<_csv.reader object at 0x10df7b6e0>
+<_csv.reader object at 0x10df7b6e0>
+<_csv.reader object at 0x10df7b6e0>
+<_csv.reader object at 0x10df7b7c0>
+<_csv.reader object at 0x10df7b980>
+<_csv.reader object at 0x10df7b980>
+<_csv.reader object at 0x10df7ba60>
+<_csv.reader object at 0x10df7ba60>
+256
+.....................E............F....
+======================================================================
+ERROR: test_01_seller_channelGuess_goodsDetail (test_case.test_case_08_login_channelGuess_goodsDetail_loginout.channelGuess_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_08_login_channelGuess_goodsDetail_loginout.py", line 110, in test_01_seller_channelGuess_goodsDetail
+    ret = self.action_channelGuess_goodsDetail(menu_id)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_08_login_channelGuess_goodsDetail_loginout.py", line 54, in action_channelGuess_goodsDetail
+    data = self.session.api('/api/mg/sale/channel/getPageFirst', param)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 88, in _request
+    if not response:
+UnboundLocalError: local variable 'response' referenced before assignment
+
+======================================================================
+FAIL: test_02_user_getCart (test_case.test_case_12_login_firstGuess_goodDetail_addCart_loginout.firstGuess_addCaet)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 200, in test_02_user_getCart
+    ret = self.action_getCart()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 180, in action_getCart
+    self.assertTrue((new_goodsIds.get(goodsId, 0) - goodsIds.get(goodsId, 0))==1, u"商品数量不正确")
+AssertionError: 商品数量不正确
+
+----------------------------------------------------------------------
+Ran 39 tests in 40.113s
+
+FAILED (errors=1, failures=1)
+<_csv.reader object at 0x102431210>
+<_csv.reader object at 0x1024312f0>
+<_csv.reader object at 0x1024312f0>
+<_csv.reader object at 0x1024312f0>
+<_csv.reader object at 0x1024312f0>
+<_csv.reader object at 0x1024312f0>
+<_csv.reader object at 0x102431520>
+<_csv.reader object at 0x102431600>
+<_csv.reader object at 0x102431670>
+<_csv.reader object at 0x102431670>
+<_csv.reader object at 0x1024316e0>
+<_csv.reader object at 0x1024316e0>
+<_csv.reader object at 0x1024316e0>
+<_csv.reader object at 0x1024316e0>
+<_csv.reader object at 0x1024317c0>
+<_csv.reader object at 0x102431980>
+<_csv.reader object at 0x102431980>
+<_csv.reader object at 0x102431a60>
+<_csv.reader object at 0x102431a60>
+256
+*******接受************
+*******接受************
+
+.................................F.....
+======================================================================
+FAIL: test_01_seller_getCart (test_case.test_case_12_login_firstGuess_goodDetail_addCart_loginout.firstGuess_addCaet)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 191, in test_01_seller_getCart
+    ret = self.action_getCart()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_12_login_firstGuess_goodDetail_addCart_loginout.py", line 180, in action_getCart
+    self.assertTrue((new_goodsIds.get(goodsId, 0) - goodsIds.get(goodsId, 0))==1, u"商品数量不正确")
+AssertionError: 商品数量不正确
+
+----------------------------------------------------------------------
+Ran 39 tests in 40.465s
+
+FAILED (failures=1)
+<_csv.reader object at 0x106437210>
+<_csv.reader object at 0x1064372f0>
+<_csv.reader object at 0x1064372f0>
+<_csv.reader object at 0x1064372f0>
+<_csv.reader object at 0x1064372f0>
+<_csv.reader object at 0x1064372f0>
+<_csv.reader object at 0x106437520>
+<_csv.reader object at 0x106437600>
+<_csv.reader object at 0x106437670>
+<_csv.reader object at 0x106437670>
+<_csv.reader object at 0x1064376e0>
+<_csv.reader object at 0x1064376e0>
+<_csv.reader object at 0x1064376e0>
+<_csv.reader object at 0x1064376e0>
+<_csv.reader object at 0x1064377c0>
+<_csv.reader object at 0x106437980>
+<_csv.reader object at 0x106437980>
+<_csv.reader object at 0x106437a60>
+<_csv.reader object at 0x106437a60>
+256
+...................E...................
+======================================================================
+ERROR: test_02_user_channel_goodsDetail (test_case.test_case_07_login_channel_goodsDetail_loginout.channel_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_07_login_channel_goodsDetail_loginout.py", line 119, in test_02_user_channel_goodsDetail
+    ret = self.action_channel_goodsDetail(menu_id)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_07_login_channel_goodsDetail_loginout.py", line 98, in action_channel_goodsDetail
+    data = self.session.api('/api/mg/good/info/detail', param)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 88, in _request
+    if not response:
+UnboundLocalError: local variable 'response' referenced before assignment
+
+----------------------------------------------------------------------
+Ran 39 tests in 42.398s
+
+FAILED (errors=1)
+<_csv.reader object at 0x107d53210>
+<_csv.reader object at 0x107d532f0>
+<_csv.reader object at 0x107d532f0>
+<_csv.reader object at 0x107d532f0>
+<_csv.reader object at 0x107d532f0>
+<_csv.reader object at 0x107d532f0>
+<_csv.reader object at 0x107d53520>
+<_csv.reader object at 0x107d53600>
+<_csv.reader object at 0x107d53670>
+<_csv.reader object at 0x107d53670>
+<_csv.reader object at 0x107d536e0>
+<_csv.reader object at 0x107d536e0>
+<_csv.reader object at 0x107d536e0>
+<_csv.reader object at 0x107d536e0>
+<_csv.reader object at 0x107d537c0>
+<_csv.reader object at 0x107d53980>
+<_csv.reader object at 0x107d53980>
+<_csv.reader object at 0x107d53a60>
+<_csv.reader object at 0x107d53a60>
+256
+*******接受*******************接受************
+
+
+{"git_address": "http://yunwei:3oD22Ypw8C3V@gitlab-pri.rd.vyohui.com/php/seller.git", "release_flag": "False", "redmine_num": "15051", "module": "seller", "id": 104, "item": "php", "create_time": 1522228234, "user": "xukaiqiang", "branch": "test_int_xukq_from_master", "env_num": "18", "action": "\u63d0\u6d4b", "message": "[\u63d0\u6d4b][task][#15051][beta18]\u8fd9\u6b21\u662f\u4e00\u4e2a\u6d4b\u8bd5\u63a8\u9001\u7684\u6539\u52a8\u8bf7\u5ffd\u7565 [\u5f71\u54cd]\u5bf9\u4ee3\u7801\u6ca1\u6709\u4efb\u4f55\u5f71\u54cd\u4e5f\u7c73\u6709\u4efb\u4f55\u6539\u52a8\n", "type": "task", "email": "xukaiqiang@davdian.com", "env_flag": "beta"}
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 42.629s
+
+OK
+<_csv.reader object at 0x1051eb210>
+<_csv.reader object at 0x1051eb2f0>
+<_csv.reader object at 0x1051eb2f0>
+<_csv.reader object at 0x1051eb2f0>
+<_csv.reader object at 0x1051eb2f0>
+<_csv.reader object at 0x1051eb2f0>
+<_csv.reader object at 0x1051eb520>
+<_csv.reader object at 0x1051eb600>
+<_csv.reader object at 0x1051eb670>
+<_csv.reader object at 0x1051eb670>
+<_csv.reader object at 0x1051eb6e0>
+<_csv.reader object at 0x1051eb6e0>
+<_csv.reader object at 0x1051eb6e0>
+<_csv.reader object at 0x1051eb6e0>
+<_csv.reader object at 0x1051eb7c0>
+<_csv.reader object at 0x1051eb980>
+<_csv.reader object at 0x1051eb980>
+<_csv.reader object at 0x1051eba60>
+<_csv.reader object at 0x1051eba60>
+0
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 42.205s
+
+OK
+<_csv.reader object at 0x106a13210>
+<_csv.reader object at 0x106a132f0>
+<_csv.reader object at 0x106a132f0>
+<_csv.reader object at 0x106a132f0>
+<_csv.reader object at 0x106a132f0>
+<_csv.reader object at 0x106a132f0>
+<_csv.reader object at 0x106a13520>
+<_csv.reader object at 0x106a13600>
+<_csv.reader object at 0x106a13670>
+<_csv.reader object at 0x106a13670>
+<_csv.reader object at 0x106a136e0>
+<_csv.reader object at 0x106a136e0>
+<_csv.reader object at 0x106a136e0>
+<_csv.reader object at 0x106a136e0>
+<_csv.reader object at 0x106a137c0>
+<_csv.reader object at 0x106a13980>
+<_csv.reader object at 0x106a13980>
+<_csv.reader object at 0x106a13a60>
+<_csv.reader object at 0x106a13a60>
+0
+*******接受************
+
+{"git_address": "http://yunwei:3oD22Ypw8C3V@gitlab-pri.rd.vyohui.com/php/seller.git", "release_flag": "False", "redmine_num": "15051", "module": "seller", "id": 104, "item": "php", "create_time": 1522228234, "user": "xukaiqiang", "branch": "test_int_xukq_from_master", "env_num": "18", "action": "\u63d0\u6d4b", "message": "[\u63d0\u6d4b][task][#15051][beta18]\u8fd9\u6b21\u662f\u4e00\u4e2a\u6d4b\u8bd5\u63a8\u9001\u7684\u6539\u52a8\u8bf7\u5ffd\u7565 [\u5f71\u54cd]\u5bf9\u4ee3\u7801\u6ca1\u6709\u4efb\u4f55\u5f71\u54cd\u4e5f\u7c73\u6709\u4efb\u4f55\u6539\u52a8\n", "type": "task", "email": "xukaiqiang@davdian.com", "env_flag": "beta"}
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 45.592s
+
+OK
+<_csv.reader object at 0x1093e7210>
+<_csv.reader object at 0x1093e72f0>
+<_csv.reader object at 0x1093e72f0>
+<_csv.reader object at 0x1093e72f0>
+<_csv.reader object at 0x1093e72f0>
+<_csv.reader object at 0x1093e72f0>
+<_csv.reader object at 0x1093e7520>
+<_csv.reader object at 0x1093e7600>
+<_csv.reader object at 0x1093e7670>
+<_csv.reader object at 0x1093e7670>
+<_csv.reader object at 0x1093e76e0>
+<_csv.reader object at 0x1093e76e0>
+<_csv.reader object at 0x1093e76e0>
+<_csv.reader object at 0x1093e76e0>
+<_csv.reader object at 0x1093e77c0>
+<_csv.reader object at 0x1093e7980>
+<_csv.reader object at 0x1093e7980>
+<_csv.reader object at 0x1093e7a60>
+<_csv.reader object at 0x1093e7a60>
+0
+*******接受************
+
+{"git_address": "http://yunwei:3oD22Ypw8C3V@gitlab-pri.rd.vyohui.com/php/seller.git", "release_flag": "False", "redmine_num": "15051", "module": "seller", "id": 104, "item": "php", "create_time": 1522228234, "user": "xukaiqiang", "branch": "test_int_xukq_from_master", "env_num": "18", "action": "\u63d0\u6d4b", "message": "[\u63d0\u6d4b][task][#15051][beta18]\u8fd9\u6b21\u662f\u4e00\u4e2a\u6d4b\u8bd5\u63a8\u9001\u7684\u6539\u52a8\u8bf7\u5ffd\u7565 [\u5f71\u54cd]\u5bf9\u4ee3\u7801\u6ca1\u6709\u4efb\u4f55\u5f71\u54cd\u4e5f\u7c73\u6709\u4efb\u4f55\u6539\u52a8\n", "type": "task", "email": "xukaiqiang@davdian.com", "env_flag": "beta"}
+.........................E.....EE...E..
+======================================================================
+ERROR: test_02_user_groupList (test_case.test_case_09_login_groupList_goodsDetail_loginout.groupList_goodsDetail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_09_login_groupList_goodsDetail_loginout.py", line 116, in test_02_user_groupList
+    ret = self.action_groupList_goodsDetail(group_list)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_09_login_groupList_goodsDetail_loginout.py", line 50, in action_groupList_goodsDetail
+    data = self.session.api('/api/mg/sale/index/getPageFirst')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 88, in _request
+    if not response:
+UnboundLocalError: local variable 'response' referenced before assignment
+
+======================================================================
+ERROR: test_02_user_addCart (test_case.test_case_11_login_getPageFirst_timeShop_goodsDetail_addCart_loginout.timeShop_addCart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_11_login_getPageFirst_timeShop_goodsDetail_addCart_loginout.py", line 138, in test_02_user_addCart
+    self.session.api('/api/mg/auth/user/login', user)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 88, in _request
+    if not response:
+UnboundLocalError: local variable 'response' referenced before assignment
+
+======================================================================
+ERROR: test_03_no_addCart (test_case.test_case_11_login_getPageFirst_timeShop_goodsDetail_addCart_loginout.timeShop_addCart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_11_login_getPageFirst_timeShop_goodsDetail_addCart_loginout.py", line 149, in test_03_no_addCart
+    ret = self.action_getCart()
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_11_login_getPageFirst_timeShop_goodsDetail_addCart_loginout.py", line 100, in action_getCart
+    response = self.session.get('/cart.html?c=cart&a=load')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 46, in get
+    return self._request(uri, None)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 88, in _request
+    if not response:
+UnboundLocalError: local variable 'response' referenced before assignment
+
+======================================================================
+ERROR: test_01_seller_search_addCart (test_case.test_case_13_login_getSearch_goodsDetail_addCart_loginout.serach_addCart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_13_login_getSearch_goodsDetail_addCart_loginout.py", line 147, in test_01_seller_search_addCart
+    ret = self.action_search_addCart(query)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_case/test_case_13_login_getSearch_goodsDetail_addCart_loginout.py", line 54, in action_search_addCart
+    data = self.session.api('/api/mg/sale/index/getSearch')
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 27, in api
+    response = self.post(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 51, in post
+    return self._request(uri, data)
+  File "/Users/dabenchen/Documents/davdian_python/test_api_dvd/lib/davdianSession.py", line 88, in _request
+    if not response:
+UnboundLocalError: local variable 'response' referenced before assignment
+
+----------------------------------------------------------------------
+Ran 39 tests in 46.352s
+
+FAILED (errors=4)
+<_csv.reader object at 0x10a8fe210>
+<_csv.reader object at 0x10a8fe2f0>
+<_csv.reader object at 0x10a8fe2f0>
+<_csv.reader object at 0x10a8fe2f0>
+<_csv.reader object at 0x10a8fe2f0>
+<_csv.reader object at 0x10a8fe2f0>
+<_csv.reader object at 0x10a8fe520>
+<_csv.reader object at 0x10a8fe600>
+<_csv.reader object at 0x10a8fe670>
+<_csv.reader object at 0x10a8fe670>
+<_csv.reader object at 0x10a8fe6e0>
+<_csv.reader object at 0x10a8fe6e0>
+<_csv.reader object at 0x10a8fe6e0>
+<_csv.reader object at 0x10a8fe6e0>
+<_csv.reader object at 0x10a8fe7c0>
+<_csv.reader object at 0x10a8fe980>
+<_csv.reader object at 0x10a8fe980>
+<_csv.reader object at 0x10a8fea60>
+<_csv.reader object at 0x10a8fea60>
+256
+*******接受************
+
+{"git_address": "http://yunwei:3oD22Ypw8C3V@gitlab-pri.rd.vyohui.com/php/seller.git", "release_flag": "False", "redmine_num": "15051", "module": "seller", "id": 104, "item": "php", "create_time": 1522228234, "user": "xukaiqiang", "branch": "test_int_xukq_from_master", "env_num": "18", "action": "\u63d0\u6d4b", "message": "[\u63d0\u6d4b][task][#15051][beta18]\u8fd9\u6b21\u662f\u4e00\u4e2a\u6d4b\u8bd5\u63a8\u9001\u7684\u6539\u52a8\u8bf7\u5ffd\u7565 [\u5f71\u54cd]\u5bf9\u4ee3\u7801\u6ca1\u6709\u4efb\u4f55\u5f71\u54cd\u4e5f\u7c73\u6709\u4efb\u4f55\u6539\u52a8\n", "type": "task", "email": "xukaiqiang@davdian.com", "env_flag": "beta"}
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 44.010s
+
+OK
+<_csv.reader object at 0x101971210>
+<_csv.reader object at 0x1019712f0>
+<_csv.reader object at 0x1019712f0>
+<_csv.reader object at 0x1019712f0>
+<_csv.reader object at 0x1019712f0>
+<_csv.reader object at 0x1019712f0>
+<_csv.reader object at 0x101971520>
+<_csv.reader object at 0x101971600>
+<_csv.reader object at 0x101971670>
+<_csv.reader object at 0x101971670>
+<_csv.reader object at 0x1019716e0>
+<_csv.reader object at 0x1019716e0>
+<_csv.reader object at 0x1019716e0>
+<_csv.reader object at 0x1019716e0>
+<_csv.reader object at 0x1019717c0>
+<_csv.reader object at 0x101971980>
+<_csv.reader object at 0x101971980>
+<_csv.reader object at 0x101971a60>
+<_csv.reader object at 0x101971a60>
+0
