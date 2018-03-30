@@ -69,6 +69,7 @@ class Login(unittest.TestCase):
         print u'个人中心接口'
         data = self.session.api('/api/mg/user/center/index')
         self.assertEqual(int(data['code']), 0, data['data'])
+        print data['code']
         # print json.dumps(data)      # 打印详细输出log
         
 

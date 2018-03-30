@@ -144,6 +144,7 @@ class firstGuess_addCaet(unittest.TestCase):
         param = {'goodsId': goodsId}
         data = self.session.api('/api/mg/good/info/detail', param)
         self.assertEqual(int(data['code']), 0, data['data'])
+        
 
         # 添加购物车
         print u'添加购物车'
