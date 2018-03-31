@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
+'''
+vyohui.cn需要loaduser和randuser
+'''
 
 import hashlib
 import urllib, urllib2
 import json
+import commands
 
 class DavdianSession:
     ''' davdian 会话'''
@@ -17,8 +21,22 @@ class DavdianSession:
     def __init__(self, mobile = None, password = None):
         if mobile and password:
             self._login(mobile, password)
-        # pass
+        # self.loadUser()
+        # self.randUser()
+        pass
+    '''
+    def loadUser(self):
+        # 文件路径
+        with open("/home/xiaoqiang.li/scripts/release_li/domain.conf", "rb") as fd:
+            reader = csv.reader(fd)
+            print reader
+            for arr in reader:
+                self.user.append({'domain':arr[0]})
 
+    def randUser(self):
+        self.loadUser()
+        user = self.user[0]
+    '''
 
     def api(self, uri, params = {}):
         requestParams = self._buildParams(params)
@@ -87,7 +105,13 @@ class DavdianSession:
         print "DEBUG\t[%s][%s]" % (url, data)
 
         try:
-            response = self.opener.open(url, data, timeout=1)
+            response = self.opener.open(url, data, timeout=20)
+            '''     # 调试
+            host_flag = ['18600960001', '18600960002', 'dabentest']
+            for m in host_flag:
+                status, output = commands.getstatusoutput("curl  http://"+m+".vyohui.cn/api/mg/auth/user/login -I -X POST")
+                print output
+            '''
         except:
             print "ERROR"
             return {'code': 999999, 'msg': 'Request Exception', 'body': 'Request Exception'}
