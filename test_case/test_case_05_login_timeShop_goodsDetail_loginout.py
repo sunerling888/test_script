@@ -24,7 +24,7 @@ from lib.davdianCsv import ReaderCsv
 class timeShop_goodsDetail(unittest.TestCase):
 
     '''获取user_csv文件'''
-    users = ReaderCsv('/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_data/test_user.csv')
+    users = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_user.csv')
 
 
     # =====执行测试=====

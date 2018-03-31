@@ -21,8 +21,8 @@ from lib.davdianCsv import ReaderCsv
 # 创建测试
 class Search(unittest.TestCase):
 
-    users = ReaderCsv('/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_data/test_user.csv')
-    searchs = ReaderCsv('/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_data/test_search.csv')
+    users = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_user.csv')
+    searchs = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_search.csv')
 
     # ===========执行测试=============
     def setUp(self):

@@ -24,9 +24,9 @@ from lib.davdianCsv import ReaderCsv
 class groupList_goodsDetail(unittest.TestCase):
 
     '''获取test_user.csv文件'''
-    users = ReaderCsv('/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_data/test_user.csv')
+    users = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_user.csv')
     '''获取test_groupList.csv文件'''
-    groups = ReaderCsv('/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_data/test_groupList.csv')
+    groups = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_groupList.csv')
 
     # =====执行测试======
     def setUp(self):

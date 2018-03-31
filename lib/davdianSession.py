@@ -28,7 +28,9 @@ class DavdianSession:
         data = urllib.urlencode(requestParams)
         response = self.post(uri, data)
         if response['code'] != 200:
-            return False
+            print "ERROR\t%s%s" % (uri, response['code'])
+            return {'code': 0 - response['code'], 'message': 'http request error', 'data':None}
+            # return False
 
         j = json.loads(response['body'])
 
@@ -88,11 +90,11 @@ class DavdianSession:
             response = self.opener.open(url, data, timeout=1)
         except:
             print "ERROR"
-            return {'code':-1, 'msg':'', 'body':''}
+            return {'code': 999999, 'msg': 'Request Exception', 'body': 'Request Exception'}
 
         if not response:
             #print "DEBUG\t[%s][%s][%s]" % (0, "", "")
-            return {'code':0, 'msg':'', 'body':''}
+            return {'code': 999999, 'msg': 'Request no response', 'body': 'Request no response'}
         
         code = response.getcode()
         msg = response.msg

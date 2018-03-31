@@ -139,7 +139,7 @@ class serach_addCart(unittest.TestCase):
 
     # =============执行case===============
     def test_01_seller_search_addCart(self):
-        print u'卖家身份:'
+        print u'卖家身份:登录 -> 搜索商品 -> 商品详情页 -> 加入购物车 -> [效验商品id] -> 退出登录'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
 
@@ -149,7 +149,7 @@ class serach_addCart(unittest.TestCase):
 
 
     def test_02_user_search_addCart(self):
-        print u'买家身份:'
+        print u'买家身份:登录 -> 搜索商品 -> 商品详情页 -> 加入购物车 -> [效验商品id] -> 退出登录'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
 
@@ -159,7 +159,7 @@ class serach_addCart(unittest.TestCase):
 
     
     def test_03_no_search_addCart(self):
-        print u'游客身份:'
+        print u'游客身份:登录 -> 搜索商品 -> 商品详情页 -> 加入购物车 -> [效验商品id] -> 退出登录'
 
         query = self.searchs.random()
         ret = self.action_search_addCart(query)

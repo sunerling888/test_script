@@ -22,8 +22,8 @@ from lib.davdianCsv import ReaderCsv
 class getChannel(unittest.TestCase):
 
     '''获取csv文件'''
-    users = ReaderCsv('/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_data/test_user.csv')
-    menus = ReaderCsv('/Users/dabenchen/Documents/davdian_python/test_api_dvd/test_data/test_menu.csv')
+    users = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_user.csv')
+    menus = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_menu.csv')
 
     # ========执行测试==========
     def setUp(self):
