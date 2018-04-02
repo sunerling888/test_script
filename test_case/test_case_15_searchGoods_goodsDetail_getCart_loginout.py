@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 '''test_case_15_searchGoods_goodsDetail_getCart_loginout.py
-登录 -> 分类 -> 【随机商品】-> 加入购物车 -> 购物车(增删查改) -> 退出登录【卖家/买家/游客】
+登录 -> 商品详情页 -> 加入购物车 -> 购物车(增删查改) -> 退出登录【卖家/买家/游客】
 '''
 
 import requests
@@ -58,8 +58,8 @@ class searchgoods_getCart(unittest.TestCase):
         data = self.session.api('/api/mg/good/info/detail', param)
         self.assertEqual(int(data['code']), 0, data['data'])
         print json.dumps(data)
-        
-        
+        return True
+
 
 
 
@@ -70,6 +70,6 @@ class searchgoods_getCart(unittest.TestCase):
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
 
-        # goods_Id = self.goods.random()
-        ret = self.action_goods_getCart()
+        goods_Id = self.goods.random()
+        ret = self.action_goods_getCart(goods_Id)
         self.assertTrue(ret)
