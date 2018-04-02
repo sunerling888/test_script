@@ -58,6 +58,10 @@ class searchgoods_getCart(unittest.TestCase):
         data = self.session.api('/api/mg/good/info/detail', param)
         self.assertEqual(int(data['code']), 0, data['data'])
         print json.dumps(data)
+
+        # 加入购物车
+        print u'加入购物车'
+        
         return True
 
 
