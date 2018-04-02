@@ -3,7 +3,7 @@
 
 '''
 test_case_14_login_firstBanner_topic_goodsDetail_addCart_loginout.py
-登录 -> 首页banner专题 -> 【随机专题商品id】 -> 加入购物车（效验商品id,效验商品数量）-> 退出登录【卖家/买家/游客】
+登录 -> 新专题 -> 【随机选择商品id】-> 商品详情页 -> 加入购物车 -> 效验购物车 -> 退出登录【卖家/买家/游客】
 '''
 
 import requests
@@ -44,7 +44,7 @@ class firstBanner_addCart(unittest.TestCase):
 
 
     # ==============测试case===================
-    '''以下是: 登录 -> 首页banner -> 专题页 -> [随机专题页商品id] -> 商品详情页 -> 加入购物车(效验商品id,数量) -> 退出登录【卖家/买家/游客】'''
+    '''以下是: 新专题 -> 【随机选择商品id】-> 商品详情页 -> 加入购物车 -> 效验购物车 -> 退出登录【卖家/买家/游客】'''
     def action_firstBanner_addCart(self, topic_Id=None):
           
         # 请求首页banner专题页
