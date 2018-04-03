@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 '''test_case_15_searchGoods_goodsDetail_getCart_loginout.py
-登录 -> 商品详情页 -> 加入购物车 -> 购物车(增删查改) -> 退出登录【卖家/买家/游客】
+登录 -> 分类 -> [随机取商品id] -> 商品详情页 -> 加入购物车 -> 购物车(增删查改) -> 退出登录【卖家/买家/游客】
 '''
 
 import requests
@@ -48,29 +48,13 @@ class searchgoods_getCart(unittest.TestCase):
         print u"分类页(图书0-2岁)"
         response = self.session.get('/categorySync-8-14-2.html?sort=2&_t=1522657956463.7556&page_size=10&page=1')
         # data = json.loads(response['body'])
-        print type(response)
         # print response
-        
-
-        
-        '''
-        # 请求商品详情页
-        print u'商品详情页'
-        param = {'goodsId':goods_Id['goodsId']}
-        data = self.session.api('/api/mg/good/info/detail', param)
-        self.assertEqual(int(data['code']), 0, data['data'])
-        print json.dumps(data)
-        
-        ''' 
-        # print response['body']
-        
         # 取出good_id,随机goods_id
         body = response['body']
         
         body = json.loads(body)
-        # print body
         goodIds = []
-        # if data not in body['data']:
+        # if 'data' not in body['data']:
             # return False
         if not body.has_key('data'):    # 判断body中的key:data
             return False
@@ -82,8 +66,20 @@ class searchgoods_getCart(unittest.TestCase):
             # print item['data'][0]['goods_id']
             goodIds.append(int(item['goods_id']))
         print goodIds
-        # goodIds = body['data'][0]['goods_id']
-        # print type(goodIds)
+
+        # 随机goods_id
+        length = len(goodIds)
+        randIndex = random.randint(0, length - 1)
+        goodsId = goodIds[randIndex]
+        print "DEBUG\t[%s][%s]" % (u'goodsId', goodsId)
+        
+
+        # 请求商品详情页
+        print u'商品详情页'
+        print "DEBUG\t[%s][%s]" % (u'goodsId', goodsId)
+        param = {'goodsId': goodsId}
+        data = self.session.api('/api/mg/good/info/detail', param)
+        self.assertEqual(int(data['code']), 0, data['data'])
         return True
 
 
