@@ -22,11 +22,11 @@ from lib.davdianCsv import ReaderCsv
 
 
  # 创建测试
-class searchgoods_getCart(unittest.TestCase):
+class categoryGoods_getCart(unittest.TestCase):
 
     '''获取test_user.csv文件'''
     users = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_user.csv')
-    goods = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_goods_cart.csv')
+    # goods = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_goods_cart.csv')
 
     # ========执行测试==========
     def setUp(self):
@@ -41,7 +41,7 @@ class searchgoods_getCart(unittest.TestCase):
 
         
     # ===================测试case====================
-    def action_goods_getCart(self, goods_Id=None):
+    def action_categoryGoods_getCart(self, goods_Id=None):
 
         
         # 请求分类页(图书0-2岁)
@@ -80,6 +80,35 @@ class searchgoods_getCart(unittest.TestCase):
         param = {'goodsId': goodsId}
         data = self.session.api('/api/mg/good/info/detail', param)
         self.assertEqual(int(data['code']), 0, data['data'])
+
+
+        # 添加购物车
+        print u'添加购物车'
+        param = {'m': 'default', 'c': 'cart', 'a': 'add_to_cart', 'goods': urllib.quote(json.dumps({"number":1, "goods_id":goodsId}))}
+        print param['goods']
+        data = self.session.post('/cart.html', urllib.urlencode(param))
+        print data
+        # 请求购物车接口
+        print u'购物车'
+        response = self.session.get('/cart.html?c=cart&a=load')
+
+        data = json.loads(response['body'])
+
+        cart_info = data['data']['cart_info']
+        goodsIds = {}
+        activitys = cart_info['activitys']
+        for item in activitys:
+            if 'goods' not in item:
+                continue
+            for goods in item['goods']:
+                if 'goods_id' not in goods:
+                    continue
+                goods_number = int(goods["goods_number"])
+                goodsIds[int(goods['goods_id'])] = goods_number
+        self.assertTrue(goodsId in goodsIds.keys(), u'添加商品不在购物车中')
+
+
+        # 添加商品数量
         return True
 
 
@@ -87,11 +116,11 @@ class searchgoods_getCart(unittest.TestCase):
 
 
     # =============执行case===============
-    def test_01_seller_goods_getCart(self):
+    def test_01_seller_categoryGoods_getCart(self):
         print u'卖家身份:'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
 
-        goods_Id = self.goods.random()
-        ret = self.action_goods_getCart(goods_Id)
+        # goods_Id = self.goods.random()
+        ret = self.action_categoryGoods_getCart()
         self.assertTrue(ret)
