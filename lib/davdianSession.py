@@ -23,6 +23,7 @@ class DavdianSession:
             self._login(mobile, password)
         # self.loadUser()
         # self.randUser()
+        self._initOpener()
         pass
     '''
     def loadUser(self):
@@ -59,6 +60,7 @@ class DavdianSession:
         if session != self.session:
             self.opener = urllib2.build_opener()
             self.opener.addheaders.append(('Cookie','dvdsid=%s' % session))
+            self._initOpener()
             self.session = session
         self.shopUrl = shopUrl
 
@@ -112,7 +114,11 @@ class DavdianSession:
                 status, output = commands.getstatusoutput("curl  http://"+m+".vyohui.cn/api/mg/auth/user/login -I -X POST")
                 print output
             '''
-        except:
+        except Exception, e:
+            # repr (e)
+            print e
+            #print url
+            #print data
             print "ERROR"
             return {'code': 999999, 'msg': 'Request Exception', 'body': 'Request Exception'}
 
@@ -126,6 +132,10 @@ class DavdianSession:
 
         #print "DEBUG\t[%s][%s][%s]" % (code, msg, data)
         return {'code':code, 'msg': msg, 'body': data}
+
+    def _initOpener(self):
+        self.opener.addheaders = [item for item in self.opener.addheaders if item[0] != 'User-agent']
+        self.opener.addheaders.append(('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'))
 
 
 
