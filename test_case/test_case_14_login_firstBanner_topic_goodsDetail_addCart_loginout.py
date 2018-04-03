@@ -64,6 +64,7 @@ class firstBanner_addCart(unittest.TestCase):
         # 返回的是字符串，先loads转换成对象
         topicContent = json.loads(topicContent)
         print type(topicContent)
+        # print topicContent
         # print type(topicContent)
         # 取下标第4个
         # print topicContent['list'][4]
