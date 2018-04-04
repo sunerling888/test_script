@@ -81,7 +81,7 @@ class categoryGoods_getCart(unittest.TestCase):
         data = self.session.api('/api/mg/good/info/detail', param)
         self.assertEqual(int(data['code']), 0, data['data'])
 
-
+        
         # 添加购物车
         print u'添加购物车'
         param = {'goods': urllib.quote(json.dumps({"number":1, "goods_id":goodsId}))}
@@ -115,14 +115,13 @@ class categoryGoods_getCart(unittest.TestCase):
 
 
         # 修改商品数量+1
-        print u'购物车添加商品数量'
+        print u'购物车商品数量+1'
         # params = {'goodsId': goodsId}
         param = {'goods[' + str(goodsId) + '][act_id]':'0', 'goods[' + str(goodsId) + '][goods_id]': str(goodsId), 'goods[' + str(goodsId) + '][goods_number]':'2', 'goods[' + str(goodsId) + '][editCheck]':'false', 'goods[' + str(goodsId) + '][price_act_id]':'0', 'goods[' + str(goodsId) + '][price_act_type]':'0' }
         print urllib.urlencode(param)
         data = self.session.post('/index.php?c=cart&a=change', urllib.urlencode(param))
-        print data
+        # print data
         
-
         # 效验添加的商品数量
         body = data['body']
         new_goodsIds= {}
@@ -149,8 +148,37 @@ class categoryGoods_getCart(unittest.TestCase):
         print "goods_number: %d" % goodsIds.get(goodsId, 0)
         self.assertTrue((new_goodsIds.get(goodsId, 0) - goodsIds.get(goodsId, 0))==1, u"商品数量不正确")
         
-
+        
         # 修改商品数量-1
+        print u'购物车商品数量-1'
+        param = {'goods[1293][act_id]':'0', 'goods[1293][goods_id]': '1293', 'goods[1293][goods_number]':'1', 'goods[1293][editCheck]':'false', 'goods[1293][price_act_id]':'0', 'goods[1293][price_act_type]':'0' }
+        #param = {'goods[' + str(goodsId) + '][act_id]':'0', 'goods[' + str(goodsId) + '][goods_id]': str(goodsId), 'goods[' + str(goodsId) + '][goods_number]':'1', 'goods[' + str(goodsId) + '][editCheck]':'false', 'goods[' + str(goodsId) + '][price_act_id]':'0', 'goods[' + str(goodsId) + '][price_act_type]':'0' }
+        print urllib.urlencode(param)
+        data = self.session.post('/index.php?c=cart&a=change', urllib.urlencode(param))
+        print data
+        
+        # 效验减少的商品数量
+        body = data['body']
+        new_goodsIds= {}
+        body = json.loads(body)
+
+        if not body.has_key('data'):
+            return False
+        cart_info = body['data']['cart_info']
+                
+        activitys = cart_info['activitys']
+        for item in activitys:
+            if 'goods' not in item:
+                continue
+            for goods in item["goods"]:
+                if 'goods_id' not in goods:
+                    continue
+                goods_number = int(goods["goods_number"])
+                new_goodsIds[int(goods["goods_id"])] = goods_number
+        
+        print "new goods_number: %d" % new_goodsIds.get(goodsId, 0)
+        print "goods_number: %d" % goodsIds.get(goodsId, 0)
+        self.assertTrue((new_goodsIds.get(goodsId, 0) == goodsIds.get(goodsId, 0)), u"商品数量不正确")
         
         return True
 
