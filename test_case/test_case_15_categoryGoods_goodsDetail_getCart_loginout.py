@@ -89,16 +89,17 @@ class categoryGoods_getCart(unittest.TestCase):
         # print data_param
         print param['goods']
         data = self.session.post('/index.php?c=cart&a=add_to_cart&m=default', urllib.urlencode(param))
-        #data = self.session.post('/index.php?c=cart&a=add_to_cart', 'goods=%257B%2522number%2522%253A%25201%252C%2520%2522goods_id%2522%253A%2520%2522562128%2522%257D')
-        print data
+        # data = self.session.post('/index.php?c=cart&a=add_to_cart', 'goods=%257B%2522number%2522%253A%25201%252C%2520%2522goods_id%2522%253A%2520%2522562128%2522%257D')
+        # print data
 
         
         # 请求购物车页面
         print u'购物车页面'
         response = self.session.get('/cart.html?c=cart&a=load')
         # print response
+        # 效验添加的商品是否在购物车中
         data = json.loads(response['body'])
-
+        
         cart_info = data['data']['cart_info']
         goodsIds = {}
         activitys = cart_info['activitys']
@@ -113,15 +114,14 @@ class categoryGoods_getCart(unittest.TestCase):
                 goodsIds[int(goods['goods_id'])] = goods_number
         self.assertTrue(goodsId in goodsIds.keys(), u'添加商品不在购物车中')
 
-
+        
         # 修改商品数量+1
         print u'购物车商品数量+1'
         # params = {'goodsId': goodsId}
         param = {'goods[' + str(goodsId) + '][act_id]':'0', 'goods[' + str(goodsId) + '][goods_id]': str(goodsId), 'goods[' + str(goodsId) + '][goods_number]':'2', 'goods[' + str(goodsId) + '][editCheck]':'false', 'goods[' + str(goodsId) + '][price_act_id]':'0', 'goods[' + str(goodsId) + '][price_act_type]':'0' }
         print urllib.urlencode(param)
         data = self.session.post('/index.php?c=cart&a=change', urllib.urlencode(param))
-        # print data
-        
+        # print data 
         # 效验添加的商品数量
         body = data['body']
         new_goodsIds= {}
@@ -133,7 +133,6 @@ class categoryGoods_getCart(unittest.TestCase):
         # body = response['body']
         # body = json.loads(body)
         # print body
-        
         activitys = cart_info['activitys']
         for item in activitys:
             if 'goods' not in item:
@@ -151,12 +150,11 @@ class categoryGoods_getCart(unittest.TestCase):
         
         # 修改商品数量-1
         print u'购物车商品数量-1'
-        param = {'goods[1293][act_id]':'0', 'goods[1293][goods_id]': '1293', 'goods[1293][goods_number]':'1', 'goods[1293][editCheck]':'false', 'goods[1293][price_act_id]':'0', 'goods[1293][price_act_type]':'0' }
-        #param = {'goods[' + str(goodsId) + '][act_id]':'0', 'goods[' + str(goodsId) + '][goods_id]': str(goodsId), 'goods[' + str(goodsId) + '][goods_number]':'1', 'goods[' + str(goodsId) + '][editCheck]':'false', 'goods[' + str(goodsId) + '][price_act_id]':'0', 'goods[' + str(goodsId) + '][price_act_type]':'0' }
+        # param = {'goods[1293][act_id]':'0', 'goods[1293][goods_id]': '1293', 'goods[1293][goods_number]':'1', 'goods[1293][editCheck]':'false', 'goods[1293][price_act_id]':'0', 'goods[1293][price_act_type]':'0' }
+        param = {'goods[' + str(goodsId) + '][act_id]':'0', 'goods[' + str(goodsId) + '][goods_id]': str(goodsId), 'goods[' + str(goodsId) + '][goods_number]':'1', 'goods[' + str(goodsId) + '][editCheck]':'false', 'goods[' + str(goodsId) + '][price_act_id]':'0', 'goods[' + str(goodsId) + '][price_act_type]':'0' }
         print urllib.urlencode(param)
         data = self.session.post('/index.php?c=cart&a=change', urllib.urlencode(param))
-        print data
-        
+        # print data
         # 效验减少的商品数量
         body = data['body']
         new_goodsIds= {}
@@ -180,18 +178,73 @@ class categoryGoods_getCart(unittest.TestCase):
         print "goods_number: %d" % goodsIds.get(goodsId, 0)
         self.assertTrue((new_goodsIds.get(goodsId, 0) == goodsIds.get(goodsId, 0)), u"商品数量不正确")
         
+        
+        # 删除商品
+        print u'删除商品'
+        param = {'goods[' + str(goodsId) + '][act_id]':'0', 'goods[' + str(goodsId) + '][goods_id]': str(goodsId), 'goods[' + str(goodsId) + '][deleted]':'1', 'goods[' + str(goodsId) + '][editCheck]':'false', 'goods[' + str(goodsId) + '][price_act_id]':'0', 'goods[' + str(goodsId) + '][price_act_type]':'0' }
+        # param = {'goods[94][act_id]':'0', 'goods[94][goods_id]': '94', 'goods[94][deleted]':'1', 'goods[94][editCheck]':'false', 'goods[94][price_act_id]':'0', 'goods[94][price_act_type]':'0' }
+        print urllib.urlencode(param)
+        data = self.session.post('/index.php?c=cart&a=change', urllib.urlencode(param))
+        # print data
+        
+        
+        # 效验删除的商品
+        body = data['body']
+        new_goodsIds= {}
+        body = json.loads(body)
+        
+        if not body.has_key('data'):
+            return False
+        cart_info = body['data']['cart_info']
+
+        '''-------*****这里判断是不是空删除后成空购物车（游客与卖家/买家返回的不一样）'''
+        if len(cart_info) == 0:
+            self.assertTrue(len(cart_info) == 0, u'删除商品失败123')
+            return True
+
+        # print cart_info
+        activitys = cart_info['activitys']
+        for item in activitys:
+            if 'goods' not in item:
+                continue
+            for goods in item['goods']:
+                if 'goods_id' not in goods:
+                    continue
+                goods_number = int(goods["goods_number"])
+                new_goodsIds[int(goods['goods_id'])] = goods_number
+        print "new goods_number: %d" % new_goodsIds.get(goodsId, 0)
+        print "goods_number: %d" % new_goodsIds.get(goodsId, 0)
+        self.assertTrue(goodsId not in new_goodsIds.keys(), u'删除商品失败')
+        
         return True
 
         
 
-
+    
     # =============执行case===============
     def test_01_seller_categoryGoods_getCart(self):
 
-        print u'卖家身份:'
+        print u'卖家身份: 登录 -> 分类 -> [随机取商品id] -> 商品详情页 -> 加入购物车 -> 购物车(增删查改) -> 退出登录'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
 
         #goods_Id = self.goods.random()
         ret = self.action_categoryGoods_getCart()
         self.assertTrue(ret)
+
+    
+    def test_02_user_categoryGoods_getCart(self):
+
+        print u'买家身份: 登录 -> 分类 -> [随机取商品id] -> 商品详情页 -> 加入购物车 -> 购物车(增删查改) -> 退出登录'
+        user = self.users.next()
+        self.session.api('/api/mg/auth/user/login', user)
+        ret = self.action_categoryGoods_getCart()
+        self.assertTrue(ret)
+    
+    
+    def test_03_no_categoryGoods_getCart(self):
+        print u'游客身份: 分类 -> [随机取商品id] -> 商品详情页 -> 加入购物车 -> 购物车(增删查改) -> 退出登录'
+
+        ret = self.action_categoryGoods_getCart()
+        self.assertTrue(ret)
+    
