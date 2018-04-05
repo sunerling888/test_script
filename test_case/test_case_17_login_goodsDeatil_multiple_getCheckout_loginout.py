@@ -2,14 +2,12 @@
 # -*- coding:utf-8 -*-
 
 '''
-test_case_16_login_goodsDeatil_single_getCheckout_loginout.py       # 普通商品
 test_case_17_login_goodsDeatil_multiple_getCheckout_loginout.py     # 多规格商品
 # 步骤
-    a. 搜索普通商品
-    b. 搜索多规格商品
-    c. 搜索结果
-    d. 商品详情页
-    e. 判断是普通商品、多规格商品
+    a. 搜索多规格商品
+    b. 搜索结果
+    c. 商品详情页
+    d. 判断是普通商品、多规格商品
         e.1 普通商品:
             e.1.1 判断"childs"字段列表是否为空  *空列表==普通商品
             e.1.2 判断"childs"字段列表是否为空  *不是空列表==多规格商品     **遍历childs -> list -> 随机goodsId
