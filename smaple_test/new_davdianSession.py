@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env Python
 # coding: utf-8
 
 import hashlib
@@ -32,7 +32,7 @@ class DavdianSession():
     def randUser(self):
         self.loadUser()
         user = self.user[0]
-        
+
         self.shopUrl = 'https://' + 'yaya000' + '.' + user['domain']
         print self.shopUrl
 
@@ -111,7 +111,7 @@ class DavdianSession():
         if not response:
             #print "DEBUG\t[%s][%s][%s]" % (0, "", "")
             return {'code':0, 'msg':'', 'body':''}
-        
+
         code = response.getcode()
         msg = response.msg
         data = response.read()

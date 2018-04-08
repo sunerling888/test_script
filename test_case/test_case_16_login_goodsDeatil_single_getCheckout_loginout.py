@@ -65,6 +65,7 @@ class single_getChecout(unittest.TestCase):
         data = self.session.api('/api/mg/sale/index/getSearch')
         self.assertEqual(int(data['code']), 0, data['data'])
 
+
         # 搜索结果
         print u'搜索结果'
         param = {'keywords':keywords['keywords'], 'h5Platform': keywords['h5Platform'], 'pageIndex': keywords['pageIndex'], 'pageSize': keywords['pageSize'], 'sort': keywords['sort']}
@@ -72,4 +73,51 @@ class single_getChecout(unittest.TestCase):
         self.assertEqual(int(data['code']), 0, data['data'])
 
         # 搜索结果取出goodsId -> 随机goodsId(商品详情)
+        feedList = data['data']['feedList']
+        contents = []
+        for item in feedList:
+            if not item.has_key('body') or not item['body'].has_key('dataList'):
+                continue
+            if len(item['body']['dataList']) < 0:
+                continue
+
+            dataList = item['body']['dataList']
+            for data in dataList:
+                if not data.has_key('command'):
+                    continue
+                if not data['command'].has_key('content'):
+                    continue
+                if re.match(r'^/\d+.html', data['command']['content']):
+                    contents.append(data['command']['content'])
+
+        length = len(contents)
+        randIndex = random.randint(0, length - 1)
+        content = contents[randIndex]
+
+        goodsIdurl = contents[randIndex]
+        goodsId = int(re.findall(r"\d+\d*", goodsIdurl)[0])
+        print "DEBUG\t[%s][%s]" %(u'goodsId', goodsId)
+
+
+        # 请求商品详情页
+        print u'商品详情页'
+        print "DEBUG\t[%s][%s]" %(u'goodsId', goodsId)
+        param = {'goodsId': goodsId}
+        data = self.session.api('/api/mg/good/info/detail', param)
+        # print json.dumps(data)
+
+        return True
+
+
+    # =============执行case===============
+    def test_01_seller_single_getCheckout(self):
+        print u'卖家身份:'
+        user = self.users.next()
+        self.session.api('/api/mg/auth/user/login', user)
+
+        query = self.searchs.random()
+        ret = self.action_single_getCheckout(query)
+        self.assertTrue(ret)
+
+
         

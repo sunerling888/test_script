@@ -35,11 +35,11 @@ class getChannel(unittest.TestCase):
     def tearDown(self):
         print u'-----测试结束------'
 
-    
+
     # ========测试case==========
     '''以下是:首页（第一屏、猜你喜欢） -> 二级菜单(第一屏、猜你喜欢) -> 退出登录'''
     def action_Channel(self, menu_id=None):
-        
+
         # 请求首页第一屏
         print u'首页第一屏'
         data = self.session.api('/api/mg/sale/index/getPageFirst')
@@ -52,7 +52,7 @@ class getChannel(unittest.TestCase):
         data = self.session.api('/api/mg/sale/index/getPageSecond')
         self.assertEqual(int(data['code']), 0, data['data'])
         # print json.dumps(data)
-        
+
         # 请求二级页第一屏
         print u'二级页第一屏'
         # 需要上传参数:menuId
@@ -75,7 +75,7 @@ class getChannel(unittest.TestCase):
 
             # 打印页数
             print "REQUEST PAGE %s" % currentPage
-        
+
             data = self.session.api('/api/mg/sale/channel/getGuessBody', param)
             # print data
             lastPage = int(data['data']['feedList'][0]['body']['lastPage'])
@@ -109,11 +109,10 @@ class getChannel(unittest.TestCase):
 
     def test_03_no_getChannel(self):
         print u'游客身份:登录 -> 首页（第一屏、猜你喜欢） -> 二级菜单(第一屏、猜你喜欢) -> 退出登录'
-        
+
         self.session.api('/api/mg/auth/user/login')
         menu_id = self.menus.random()
         ret = self.action_Channel(menu_id)
         self.assertTrue(ret)
 
 
-        

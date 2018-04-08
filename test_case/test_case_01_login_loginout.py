@@ -24,7 +24,7 @@ from lib.davdianCsv import ReaderCsv
 class Login(unittest.TestCase):
 
     users = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_user.csv')
-    
+
     '''
     idx = 0
     user = []
@@ -57,13 +57,13 @@ class Login(unittest.TestCase):
         # 方式二
         self.session = DavdianSession()
         #self.session.api('/api/mg/auth/user/login', {'mobile': arr['mobile'], 'password': arr['password']})
-        #self.test_01_login_success()        
-        
+        #self.test_01_login_success()
+
     def tearDown(self):
         print u'=======测试结束======'
         self.session.api('/api/mg/auth/user/logout')
 
-        
+
     # =======================测试case===========================
     def action_setting(self):
         print u'个人中心接口'
@@ -71,14 +71,14 @@ class Login(unittest.TestCase):
         self.assertEqual(int(data['code']), 0, data['data'])
         print data['code']
         # print json.dumps(data)      # 打印详细输出log
-        
+
 
         # 请求设置页面
         print u'设置页面'
         response = self.session.get('/settings.html')
         # print response
         return "退出登录" in response['body']
-    
+
 
 
     def test_01_seller_setting(self):
@@ -89,8 +89,8 @@ class Login(unittest.TestCase):
         self.session.api('/api/mg/auth/user/login', user)
         ret = self.action_setting()
         self.assertTrue(ret)
-        
-    
+
+
     def test_02_user_setting(self):
         print u'买家身份: 登录 -> 个人中心 -> 设置页面 -> 退出登录'
         user = self.users.next()
@@ -105,10 +105,9 @@ class Login(unittest.TestCase):
         print u'游客身份: 登录 -> 个人中心 -> 设置页面 -> 退出登录'
         ret = self.action_setting()
         self.assertTrue(not ret, "not login user failed!")
-    
 
 
-    
 
 
-    
+
+

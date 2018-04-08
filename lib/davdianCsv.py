@@ -28,17 +28,17 @@ class ReaderCsv:
             lines = [line for line in reader]
             length = len(lines)
             idx = 1
-            
+
             header = lines[0]
             while idx < length:
                 data = lines[idx]
                 self.items.append(dict(zip(header, data)))
                 idx += 1
-        
+
             #for arr in reader:
             #    self.items.append({'mobile':arr[0], 'password':arr[1]})
         self.idx = 0
-    
+
     # 封装取下一个数据方法
     def next(self, safe = False):
         if self.idx >= len(self.items):
@@ -49,7 +49,7 @@ class ReaderCsv:
         index = self.idx
         self.idx += 1
         return self.items[index]
-    
+
     def current(self):
         if self.idx >= len(self.items):
             return False
