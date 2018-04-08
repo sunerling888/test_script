@@ -33,6 +33,7 @@ from requests.sessions import Session
 from nose.tools import *
 from lib.davdianSession import DavdianSession
 from lib.davdianCsv import ReaderCsv
+from bs4 import BeautifulSoup
 
 
 # 创建测试
@@ -106,18 +107,77 @@ class single_getChecout(unittest.TestCase):
         data = self.session.api('/api/mg/good/info/detail', param)
         # print json.dumps(data)
 
+        # 判断普通商品
+        basis = data['data']['basis']
+        goodsName = basis['goodsName']
+        print goodsName
+        # print json.dumps(basis)
+        if not basis.has_key('childs'):
+            return False
+        # goodsName = data['data']['basis']
+        # print goodsName
+        if len(basis['childs']) > 0:
+            return False
+        extra = data['data']['extra']
+        # print len(extra['dataList'])
+        if not extra.has_key('dataList') or len(extra['dataList']) == 0:
+            return False
+        dataList = extra['dataList'][0]
+        sales = dataList['sales']['goodsStocks']
+        status = dataList['status']['onSale']
+        print sales,status
+        
+
+        # 请求订单确认页
+        if sales == 0 and status != 1:
+            return False
+        param = {'goods[0][id]': str(goodsId), 'goods[0][number]': '1'}
+        print param['goods[0][id]']
+        print param['goods[0][number]']
+        response = self.session.get('/checkout.html?rp=goods_detail&rl=checkout' + '&' + urllib.urlencode(param))
+        print urllib.urlencode(param)
+        print response['body']
+
+        # 判断确认订单页商品名称
+
+        # 取出response['body']里的商品名称
+        soup = BeautifulSoup(response['body'], 'html.parser')
+        content = soup.find_all("div", class_='good_title')
+        # 获取good_title里的值
+        content = []
+        if content == 0:
+            content = content[0].get_text().strip()
+            print content
+            self.assertTrue(goodsName == content, u'商品不存在!')
         return True
 
 
-    # =============执行case===============
+    # =============执行case==============
     def test_01_seller_single_getCheckout(self):
-        print u'卖家身份:'
+        print u'卖家身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
 
         query = self.searchs.random()
         ret = self.action_single_getCheckout(query)
         self.assertTrue(ret)
+    
+    def test_02_user_single_getCheckout(self):
+        print u'买家身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
+        user = self.users.next()
+        self.session.api('/api/mg/auth/user/login', user)
 
-
+        query = self.searchs.random()
+        ret = self.action_single_getCheckout(query)
+        self.assertTrue(ret)
         
+    
+    def test_03_no_single_getCheckout(self):
+        print u'游客身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
+        
+        query = self.searchs.random()
+        ret = self.action_single_getCheckout(query)
+        # 判断sess_key后8位是不是00000001
+        # sess_key = re.match
+        self.assertTrue(ret)    
+    
