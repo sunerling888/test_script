@@ -202,7 +202,7 @@ class single_getChecout(unittest.TestCase):
         
         result = False
         if  "js/login.js" in body:
-            print body
+            # print body
             result=True
         
         self.assertTrue(result)    
