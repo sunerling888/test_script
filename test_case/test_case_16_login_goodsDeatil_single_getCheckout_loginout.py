@@ -92,6 +92,8 @@ class single_getChecout(unittest.TestCase):
                     contents.append(data['command']['content'])
 
         length = len(contents)
+        
+        # randIndex = 0     随机固定第一个
         randIndex = random.randint(0, length - 1)
         content = contents[randIndex]
 
@@ -114,8 +116,6 @@ class single_getChecout(unittest.TestCase):
         # print json.dumps(basis)
         if not basis.has_key('childs'):
             return (False, '')
-        # goodsName = data['data']['basis']
-        # print goodsName
         if len(basis['childs']) > 0:
             return (False, '')
         extra = data['data']['extra']
@@ -132,11 +132,11 @@ class single_getChecout(unittest.TestCase):
         if sales == 0 and status != 1:
             return (False, '')
         param = {'goods[0][id]': str(goodsId), 'goods[0][number]': '1'}
-        print param['goods[0][id]']
-        print param['goods[0][number]']
+        # print param['goods[0][id]']
+        # print param['goods[0][number]']
         response = self.session.get('/checkout.html?rp=goods_detail&rl=checkout' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
-        # print response
+        # print response['body']
 
         # 判断确认订单页商品名称
         # 取出response['body']里的商品名称
@@ -145,13 +145,13 @@ class single_getChecout(unittest.TestCase):
         content = soup.find_all("div", class_='good_title')
         print content
         # 获取good_title里的值
-        # if len(content) > 0:
-        content = content[0].get_text().strip()
-        print "content************"
-        print content
-        print "content************"
-        if goodsName == content:
-            result = True
+        if len(content) > 0:
+            content = content[0].get_text().strip()
+            print "content************"
+            print content
+            print "content************"
+            if goodsName == content:
+                result = True
             self.assertTrue(result, u'商品不存在!')
 
         return (result,response['body'])
@@ -162,13 +162,13 @@ class single_getChecout(unittest.TestCase):
     def test_01_seller_single_getCheckout(self):
         print u'卖家身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
         user = self.users.next()
-        print "------------user1-------------"
-        print user
-        print "------------user1-------------"
+        # print "------------user1-------------"
+        # print user
+        # print "------------user1-------------"
         self.session.api('/api/mg/auth/user/login', user)
 
         query = self.searchs.random()
-        print query
+        # print query
         ret,body = self.action_single_getCheckout(query)
         self.assertTrue(ret)
     
@@ -176,16 +176,16 @@ class single_getChecout(unittest.TestCase):
     def test_02_user_single_getCheckout(self):
         print u'买家身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
         user = self.users.next()
-        print "------------user2-----------"
-        print user
-        print "------------user2-----------"
+        # print "------------user2-----------"
+        # print user
+        # print "------------user2-----------"
         self.session.api('/api/mg/auth/user/login', user)
 
         query = self.searchs.random()
-        print query
+        # print query
         ret,body = self.action_single_getCheckout(query)
         self.assertTrue(ret)
-        
+      
     
     def test_03_no_single_getCheckout(self):
         print u'游客身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
@@ -206,3 +206,4 @@ class single_getChecout(unittest.TestCase):
             result=True
         
         self.assertTrue(result)    
+    
