@@ -91,7 +91,7 @@ class multiple_getCheckout(unittest.TestCase):
         length = len(contents)
         # sales = 0
         # status = 0
-        while True:
+        while True:     # 循环直到取到sales里的goodsStocks大于0，status里的onSale不等于1
             randIndex = random.randint(0, length - 1)
             content = contents[randIndex]
 
