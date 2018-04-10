@@ -129,10 +129,11 @@ class multiple_getCheckout(unittest.TestCase):
             sales = dataList['sales']['goodsStocks']
             status = dataList['status']['onSale']
             print sales,status
+            # 判断sales大于0，字符串需要转换成int
             if int(sales) > 0:
-                print "***********************"
-                print sales
-                print "***********************"
+                # print "***********************"
+                # print sales
+                # print "***********************"
                 break
         # 多规格商品拼接: goodsName + title
         goodsNames = goodsName + '_' + title
@@ -167,7 +168,7 @@ class multiple_getCheckout(unittest.TestCase):
     # =============执行case==============
 
     def test_01_seller_multiple_getCheckout(self):
-        print u'卖家身份:'
+        print u'卖家身份: 搜索商品(多规格商品) -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
 
@@ -177,7 +178,7 @@ class multiple_getCheckout(unittest.TestCase):
 
     
     def test_02_user_multiple_getCheckout(self):
-        print u'买家身份:'
+        print u'买家身份:搜索商品(多规格商品) -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
 
@@ -187,7 +188,7 @@ class multiple_getCheckout(unittest.TestCase):
 
     
     def test_03_no_multiple_getCheckout(self):
-        print u'游客身份:'
+        print u'游客身份:搜索商品(多规格商品) -> 商品详情页 -> 立即购买 -> 订单确认页 -> 登录(判断是否跳到登录页)'
 
         query = self.searchs.random()
         ret, body = self.action_multiple_getCheckout(query)

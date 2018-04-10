@@ -188,7 +188,7 @@ class single_getChecout(unittest.TestCase):
       
     
     def test_03_no_single_getCheckout(self):
-        print u'游客身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 退出登录'
+        print u'游客身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 登录(判断是否跳到登录页)'
         
         query = self.searchs.random()
         ret,body = self.action_single_getCheckout(query)
