@@ -45,9 +45,9 @@ class categoryGoods_getCart_buy(unittest.TestCase):
     # ===================测试case====================
     def action_categoryGoods_getCart_buy(self, goods_Id=None):
 
-        # 请求分类页(图书11-14岁)
-        print u'分类页(图书11-14岁)'
-        response = self.session.get('/categorySync-8-444-2.html?sort=2&_t=1523329035375.4707&page_size=10&page=1')
+        # 请求分类页(图书0-2岁)
+        print u"分类页(图书0-2岁)"
+        response = self.session.get('/categorySync-8-14-2.html?sort=2&_t=1522657956463.7556&page_size=10&page=1')
         # print response
         # 取出good_id,随机good_id
         body = response['body']
@@ -126,37 +126,54 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         print urllib.urlencode(param)
         # print response1['body']
 
-        result = False
+        if response1['body'].find('js/login.js') != -1:
+            return (True, response1['body'])
+
         # 订单页取出addressId,获取addressId的值
         value = 'window.addressId = '
         index = response1['body'].find(value)
         if index == -1:
             return (False, '')
-        print index
+        # print index
         add_index = index+len(value)
         for i in response1['body'][add_index:]:
             if i == ';':
                 break
             add_index += 1
-        print response1['body'][(index+len(value)):add_index]
+        # print response1['body'][(index+len(value)):add_index]
+        addressId = response1['body'][(index+len(value)):add_index]
+        print addressId
 
         # 订单确认页设置不使用红包
         param = {'bonus_id':0}
         response = self.session.get('/checkoutBonus.html?' + urllib.urlencode(param))
         print urllib.urlencode(param)
         # print response
-        
-        
-        return (result, response1['body']) 
+        result = False
+        # return (result, response1['body']) 
           
         # 点击去支付,请求vdone页
-        # print u'订单确认页生成订单'
-        
+        print u'订单确认页生成订单'
+        # http://18600967174.davdian.com/vdone.html?rp=checkout&rl=next&order_id=0&bonus_id=0&address_id=3652798&password=&commission=0&rp=cart&rl=checkout
+        param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0}
+        response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + urllib.urlencode(param))
+        print urllib.urlencode(param)
+        print response['body']
+        '''
+        # 效验status值是否等于0
+        body = response['body']
+        statuss = []
+        if not body.has_key('status'):
+            return (False, '')
+        if len(body['status']) < 0:
+            return (False, '')
+        print status
+        '''
         return True
 
     # =============执行case==============
     def test_01_seller_categoryGoods_getCart_buy(self):
-        print u'卖家身份:'
+        print u'卖家身份: 登录 -> 分类页 -> 商品详情页 -> 加入购物车 -> 购物车结算 -> 订单确认页 -> 去支付'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
         ret = self.action_categoryGoods_getCart_buy()
@@ -164,7 +181,7 @@ class categoryGoods_getCart_buy(unittest.TestCase):
 
     
     def test_02_user_categoryGoods_getCart_buy(self):
-        print u'买家身份:'
+        print u'买家身份: 登录 -> 分类页 -> 商品详情页 -> 加入购物车 -> 购物车结算 -> 订单确认页 -> 去支付'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
         ret = self.action_categoryGoods_getCart_buy()
@@ -172,17 +189,12 @@ class categoryGoods_getCart_buy(unittest.TestCase):
 
     
     def test_03_no_categoryGoods_getCart_buy(self):
-        print u'游客身份:'
-
-        ret,body = self.action_categoryGoods_getCart_buy()
+        print u'游客身份: 分类页 -> 商品详情页 -> 加入购物车 -> 购物车结算 -> 订单确认页 -> 登录(判断是否跳到登录页)'
+        ret= self.action_categoryGoods_getCart_buy()
+        print ret
         # 取出sess_key
         sess_key = self.session.session
         print sess_key
 
-        result = False
-        if "js/login.js" in body:
-            # print body
-            result = True
-
-        self.assertTrue(result)
+        self.assertTrue(ret)
     
