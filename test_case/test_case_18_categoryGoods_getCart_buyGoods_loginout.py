@@ -124,30 +124,29 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         param = {'goods[0][id]': str(goodsId), 'goods[0][number]': '1'}
         response1 = self.session.get('/checkout.html?rp=goods_detail&rl=checkout' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
-        # print response1
+        # print response1['body']
+
+        result = False
+        # 订单页取出addressId,获取addressId的值
+        value = 'window.addressId = '
+        index = response1['body'].find(value)
+        if index == -1:
+            return (False, '')
+        print index
+        add_index = index+len(value)
+        for i in response1['body'][add_index:]:
+            if i == ';':
+                break
+            add_index += 1
+        print response1['body'][(index+len(value)):add_index]
 
         # 订单确认页设置不使用红包
         param = {'bonus_id':0}
         response = self.session.get('/checkoutBonus.html?' + urllib.urlencode(param))
         print urllib.urlencode(param)
-        #print response
-
-        # 订单页取出addressId
-        result = False
-        soup = BeautifulSoup(response1['body'], 'html.parser')
-        print soup
-        content = soup.find_all("script", class_="window.addressId") 
-        print content
-        # 获取addressId里的值
-        '''
-        if len(content) > 0:
-        content = content[0].get_text()
-
-        print "content*****************"
-        content
-        print "content*****************"
-        # print response['body']
-        '''
+        # print response
+        
+        
         return (result, response1['body']) 
           
         # 点击去支付,请求vdone页
@@ -162,3 +161,28 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         self.session.api('/api/mg/auth/user/login', user)
         ret = self.action_categoryGoods_getCart_buy()
         self.assertTrue(ret)
+
+    
+    def test_02_user_categoryGoods_getCart_buy(self):
+        print u'买家身份:'
+        user = self.users.next()
+        self.session.api('/api/mg/auth/user/login', user)
+        ret = self.action_categoryGoods_getCart_buy()
+        self.assertTrue(ret)
+
+    
+    def test_03_no_categoryGoods_getCart_buy(self):
+        print u'游客身份:'
+
+        ret,body = self.action_categoryGoods_getCart_buy()
+        # 取出sess_key
+        sess_key = self.session.session
+        print sess_key
+
+        result = False
+        if "js/login.js" in body:
+            # print body
+            result = True
+
+        self.assertTrue(result)
+    
