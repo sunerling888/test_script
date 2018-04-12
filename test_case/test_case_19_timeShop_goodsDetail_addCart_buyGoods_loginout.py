@@ -2,8 +2,8 @@
 # -*- coding:utf-8 -*-
 
 '''
-test_case_18_categoryGoods_getCart_buyGoods_loginout.py
-登录 -> 分类页 -> 商品详情页 -> 加入购物车 -> 购物车结算 -> 订单确认页 -> 去支付
+test_case_19_timeShop_goodsDetail_addCart_buyGoods_loginput.py
+# 登录 -> 首页限时购 -> 随机商品 -> 商品详情页 -> 加入购物车 -> 订单确认 -> 去支付 -> 生成订单 -> 退出登录
 '''
 
 import requests
@@ -12,58 +12,57 @@ import urllib,urllib2
 import csv
 import json
 import random
-import re
 import sys
+import re
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from requests.sessions import Session
 from nose.tools import *
 from lib.davdianSession import DavdianSession
 from lib.davdianCsv import ReaderCsv
-from bs4 import BeautifulSoup
 
 
 # 创建测试
-class categoryGoods_getCart_buy(unittest.TestCase):
-
-    '''获取test_user.csv'''
+class timeShop_getCart_buy(unittest.TestCase):
+    
+    '''获取user_csv'''
     users = ReaderCsv('/Users/dabenchen/Downloads/daben_chen_py/test_data/test_user.csv')
 
 
-    # ========执行测试==========
+    # =====执行测试=====
     def setUp(self):
-        print u'-----测试开始-----'
+        print u'----测试开始-----'
 
+        # 调用DavdianSession()
         self.session = DavdianSession()
 
     def tearDown(self):
-        print u'-----测试结束-----'
+        print u'----测试结束-----'
         self.session.api('/api/mg/auth/user/logout')
 
     
+    # ============测试case================
+    '''以下是: 登录 -> 首页限时购 -> [随机限时购商品] -> 商品详情页 -> 加入购物车 -> 订单确认 -> 去支付生成订单'''
+    def action_timeShop_getCart_buy(self):
 
-    # ===================测试case====================
-    def action_categoryGoods_getCart_buy(self, goods_Id=None):
+        # 请求首页限时购
+        print u'首页限时购'
+        data = self.session.api('/api/mg/sale/index/getPageFirst')
 
-        # 请求分类页(图书0-2岁)
-        print u"分类页(图书0-2岁)"
-        response = self.session.get('/categorySync-8-14-2.html?sort=2&_t=1522657956463.7556&page_size=10&page=1')
-        # print response
-        # 取出good_id,随机good_id
-        body = response['body']
+        feedList = data['data']['feedList']
+        goodsIds = []
+        for item in feedList:
+            if 'body' not in item or 'dataList' not in item['body']:
+                continue
+            if len(item['body']['dataList']) < 1 or 'goodsId' not in item['body']['dataList'][0]:
+                continue
 
-        body = json.loads(body)
-        goodIds = []
-        if not body.has_key('data'):
-            return (False, '')
-        for item in body['data']:
-            goodIds.append(int(item['goods_id']))
-        print goodIds
+            goodsIds.append((int)(item['body']['dataList'][0]['goodsId']))
 
-        # 随机goods_id
-        length = len(goodIds)
+        length = len(goodsIds)
         randIndex = random.randint(0, length - 1)
-        goodsId = goodIds[randIndex]
+
+        goodsId = goodsIds[randIndex]
         print "DEBUG\t[%s][%s]" % (u'goodsId', goodsId)
 
 
@@ -72,6 +71,7 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         print "DEBUG\t[%s][%s]" % (u'goodsId', goodsId)
         param = {'goodsId':goodsId}
         data = self.session.api('/api/mg/good/info/detail', param)
+        # print data
         self.assertEqual(int(data['code']), 0, data['data'])
         # 判断普通商品
         basis = data['data']['basis']
@@ -96,17 +96,17 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         data = self.session.post('/index.php?c=cart&a=add_to_cart&m=default', urllib.urlencode(param))
 
 
-        # 请求购物车页面
-        print u'购物车页面'
+        # 请求购物车页
+        print u'购物车页'
         response = self.session.get('/cart.html?c=cart&a=load')
         # print response
-        # 校验购物车页面是否在购物车中
-        data = json.loads(response['body'])
 
+        # 效验添加商品是否在购物车中
+        data = json.loads(response['body'])
         cart_info = data['data']['cart_info']
         goodsIds = {}
         activitys = cart_info['activitys']
-        for item in activitys: 
+        for item in activitys:
             if 'goods' not in item:
                 continue
             for goods in item['goods']:
@@ -114,19 +114,22 @@ class categoryGoods_getCart_buy(unittest.TestCase):
                     continue
                 goods_number = int(goods['goods_number'])
                 goodsIds[int(goods['goods_id'])] = goods_number
-        self.assertTrue(goodsId in goodsIds.keys(), u'添加商品不在购物车中')
+        self.assertTrue(goodsId in goodsIds.keys(), u'添加的商品不在购物车中')
 
 
-        # 点击结算,请求订单确认页
+        # 请求订单确认页
         print u'订单确认页'
         if sales == 0 and status != 1:
             return (False, '')
-        param = {'goods[0][id]': str(goodsId), 'goods[0][number]': '1'}
+        param = {'goods[0][id]': str(goodsId), 'goods[0][number]':'1'}
         response1 = self.session.get('/checkout.html?rp=goods_detail&rl=checkout' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
         # print response1['body']
 
-        # 判断:游客身份跳转到登录页面
+        
+        '''
+        判断: 游客身份跳转到登录页面
+        '''
         if response1['body'].find('js/login.js') != -1:
             return (True, response1['body'])
 
@@ -136,8 +139,8 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         if index == -1:
             return (False, '')
         # print index
-        add_index = index+len(value)
-        for i in response1['body'][add_index:]:
+        add_index = index + len(value)
+        for i in response1['body'][add_index]:
             if i == ';':
                 break
             add_index += 1
@@ -145,57 +148,47 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         addressId = response1['body'][(index+len(value)):add_index]
         print addressId
 
-        # 订单确认页设置不使用红包
+
+        # 请求订单确认页，设置不使用红包
         param = {'bonus_id':0}
         response = self.session.get('/checkoutBonus.html?' + urllib.urlencode(param))
         print urllib.urlencode(param)
         # print response
-        result = False
-        # return (result, response1['body']) 
-          
-        # 点击去支付,请求vdone页
+
+
+        # 去支付,请求vode页
         print u'订单确认页生成订单'
-        # http://18600967174.davdian.com/vdone.html?rp=checkout&rl=next&order_id=0&bonus_id=0&address_id=3652798&password=&commission=0&rp=cart&rl=checkout
         param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0}
         response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
         print response['body']
-        '''
-        # 效验status值是否等于0
-        body = response['body']
-        statuss = []
-        if not body.has_key('status'):
-            return (False, '')
-        if len(body['status']) < 0:
-            return (False, '')
-        print status
-        '''
+
         return True
 
+    
     # =============执行case==============
-    def test_01_seller_categoryGoods_getCart_buy(self):
-        print u'卖家身份: 登录 -> 分类页 -> 商品详情页 -> 加入购物车 -> 购物车结算 -> 订单确认页 -> 去支付'
+    def test_01_seller_timeShop_getCart_buy(self):
+        print u'卖家身份: 登录 -> '
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
-        ret = self.action_categoryGoods_getCart_buy()
+        ret = self.action_timeShop_getCart_buy()
         self.assertTrue(ret)
 
     
-    def test_02_user_categoryGoods_getCart_buy(self):
-        print u'买家身份: 登录 -> 分类页 -> 商品详情页 -> 加入购物车 -> 购物车结算 -> 订单确认页 -> 去支付'
+    def test_02_user_timeShop_getCart_buy(self):
+        print u'买家身份:'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
-        ret = self.action_categoryGoods_getCart_buy()
+        ret = self.action_timeShop_getCart_buy()
         self.assertTrue(ret)
 
     
-    def test_03_no_categoryGoods_getCart_buy(self):
-        print u'游客身份: 分类页 -> 商品详情页 -> 加入购物车 -> 购物车结算 -> 订单确认页 -> 登录(判断是否跳到登录页)'
-        ret= self.action_categoryGoods_getCart_buy()
+    def test_03_no_timeShop_getCart_buy(self):
+        print u'游客身份:'
+        ret = self.action_timeShop_getCart_buy()
         print ret
-        # 取出sess_key
-        sess_key = self.session.session
+        # 取出游客sess_key
+        sess_key = self.sess_key.session.session
         print sess_key
 
-        self.assertTrue(ret)
-    
+                
