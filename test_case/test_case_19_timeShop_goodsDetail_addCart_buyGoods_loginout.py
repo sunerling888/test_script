@@ -168,7 +168,7 @@ class timeShop_getCart_buy(unittest.TestCase):
     
     # =============执行case==============
     def test_01_seller_timeShop_getCart_buy(self):
-        print u'卖家身份: 登录 -> '
+        print u'卖家身份: 登录 -> 首页限时购 -> [随机限时购商品] -> 商品详情页 -> 加入购物车 -> 订单确认 -> 去支付生成订单'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
         ret = self.action_timeShop_getCart_buy()
@@ -176,7 +176,7 @@ class timeShop_getCart_buy(unittest.TestCase):
 
     
     def test_02_user_timeShop_getCart_buy(self):
-        print u'买家身份:'
+        print u'买家身份: 登录 -> 首页限时购 -> [随机限时购商品] -> 商品详情页 -> 加入购物车 -> 订单确认 -> 去支付生成订单'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
         ret = self.action_timeShop_getCart_buy()
@@ -184,11 +184,11 @@ class timeShop_getCart_buy(unittest.TestCase):
 
     
     def test_03_no_timeShop_getCart_buy(self):
-        print u'游客身份:'
+        print u'游客身份: 首页限时购 -> [随机限时购商品] -> 商品详情页 -> 加入购物车 -> 订单确认 -> 登录(判断是否跳到登录页)'
         ret = self.action_timeShop_getCart_buy()
         print ret
         # 取出游客sess_key
-        sess_key = self.sess_key.session.session
+        sess_key = self.session.session
         print sess_key
 
                 
