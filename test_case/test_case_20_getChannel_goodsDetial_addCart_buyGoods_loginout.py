@@ -160,8 +160,8 @@ class getChannel_getCart_buy(unittest.TestCase):
             if j == ';':
                 break
             add_index += 1
-        idcard_id = response1['body'][(index+len(value2)):add_index]
-        print u'身份信息id:', idcard_id
+        idcard = response1['body'][(index+len(value2)):add_index]
+        print u'身份信息id:', idcard
 
         # 取出订单确认页，收货人姓名
         result = False
@@ -190,7 +190,7 @@ class getChannel_getCart_buy(unittest.TestCase):
 
         # 去支付，请求vdone页
         print u'订单确认页生成订单'
-        param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard_id':idcard_id}
+        param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard':idcard}
         response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
         print response['body']
