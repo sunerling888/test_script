@@ -145,6 +145,30 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         addressId = response1['body'][(index+len(value)):add_index]
         print addressId
 
+        # 订单确认页，取出身份证信息id
+        value2 = 'idcard_id = '
+        index = response1['body'].find(value2)
+        if index == -1:
+            return (False, '')
+        add_index = index + len(value2)
+        for j in response1['body'][add_index:]:
+            if j == ';':
+                break
+            add_index += 1
+        idcard = response1['body'][(index+len(value2)):add_index]
+        print u'身份信息id:', idcard
+
+        # 取出订单确认页，收货人姓名
+        result = False
+        soup = BeautifulSoup(response1['body'], 'html.parser')
+        base_name = soup.find_all("span", class_='name')
+        # print base_name
+        # 获取good_title里的值
+        if len(base_name) > 0:
+            base_name = base_name[0].get_text().strip()
+            print u'收货人姓名:', base_name
+
+
         # 订单确认页设置不使用红包
         param = {'bonus_id':0}
         response = self.session.get('/checkoutBonus.html?' + urllib.urlencode(param))
@@ -156,7 +180,7 @@ class categoryGoods_getCart_buy(unittest.TestCase):
         # 点击去支付,请求vdone页
         print u'订单确认页生成订单'
         # http://18600967174.davdian.com/vdone.html?rp=checkout&rl=next&order_id=0&bonus_id=0&address_id=3652798&password=&commission=0&rp=cart&rl=checkout
-        param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0}
+        param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard':idcard }
         response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
         print response['body']

@@ -20,6 +20,7 @@ from requests.sessions import Session
 from nose.tools import *
 from lib.davdianSession import DavdianSession
 from lib.davdianCsv import ReaderCsv
+from bs4 import BeautifulSoup
 
 
 # 创建测试
@@ -127,9 +128,8 @@ class timeShop_getCart_buy(unittest.TestCase):
         # print response1['body']
 
         
-        '''
-        判断: 游客身份跳转到登录页面
-        '''
+        
+        # 判断: 游客身份跳转到登录页面
         if response1['body'].find('js/login.js') != -1:
             return (True, response1['body'])
 
@@ -148,6 +148,29 @@ class timeShop_getCart_buy(unittest.TestCase):
         addressId = response1['body'][(index+len(value)):add_index]
         print addressId
 
+        # 订单确认页，取出身份证信息id
+        value2 = 'idcard_id = '
+        index = response1['body'].find(value2)
+        if index == -1:
+            return (False, '')
+        add_index = index + len(value2)
+        for j in response1['body'][add_index:]:
+            if j == ';':
+                break
+            add_index += 1
+        idcard = response1['body'][(index+len(value2)):add_index]
+        print u'身份信息id:', idcard
+
+        # 取出订单确认页，收货人姓名
+        result = False
+        soup = BeautifulSoup(response1['body'], 'html.parser')
+        base_name = soup.find_all("span", class_='name')
+        # print base_name
+        # 获取good_title里的值
+        if len(base_name) > 0:
+            base_name = base_name[0].get_text().strip()
+            print u'收货人姓名:', base_name
+
 
         # 请求订单确认页，设置不使用红包
         param = {'bonus_id':0}
@@ -159,7 +182,7 @@ class timeShop_getCart_buy(unittest.TestCase):
 
         # 去支付,请求vode页
         print u'订单确认页生成订单'
-        param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0}
+        param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard':idcard}
         response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
         print response['body']
