@@ -170,6 +170,15 @@ class categoryGoods_getCart_buy(unittest.TestCase):
             return (False, '')
         print status
         '''
+        # 效验status是否等于0,不等于0打印status,msg
+        s = json.loads(response['body'])
+        if 'status' in s:
+            if s['status'] != 0:
+                print "Failed! [status not 0][status:%s][message:%s]" % (s['status'], s['msg'])
+                # response.("Failed! [status not 0][status:%s][message:%s]" % (s['status'], s['msg']))
+                return False
+                
+            print "SUCEESS! [status not 0][status:%s][message:%s]" % (s['status'], s['msg'])
         return True
 
     # =============执行case==============

@@ -164,6 +164,15 @@ class timeShop_getCart_buy(unittest.TestCase):
         print urllib.urlencode(param)
         print response['body']
 
+        # 效验status是否等于0,不等于0打印status,msg
+        s = json.loads(response['body'])
+        if 'status' in s:
+            if s['status'] != 0:
+                print "Failed! [status not 0][status:%s][message:%s]" % (s['status'], s['msg'])
+                # response.("Failed! [status not 0][status:%s][message:%s]" % (s['status'], s['msg']))
+                return False
+                
+            print "SUCEESS! [status not 0][status:%s][message:%s]" % (s['status'], s['msg'])
         return True
 
     
