@@ -108,42 +108,54 @@ class getChannel_getCart_buy(unittest.TestCase):
         goodsNames = goodsName + '_' + title
         print goodsNames
         '''
+        # 加入购物车
+        print u'加入购物车'
+        param = {'goods': urllib.quote(json.dumps({"number":1, "goods_id":goodsId}))}
+        print param['goods']
+        data = self.session.post('/index.php?c=cart&a=add_to_cart&m=default', urllib.urlencode(param))
+
+        # 请求购物车页面
+        print u'购物车页面'
+        response = self.session.get('/cart.html?c=cart&a=load')
+        # print response
+
 
         # 请求订单确认页
+        print u'订单确认页'
         if sales == 0 and status != 1:
             return (False, '')
         param = {'goods[0][id]': str(goodsId), 'goods[0][number]': '1'}
         response1 = self.session.get('/checkout.html?rp=goods_detail&rl=checkout' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
 
-        '''
-        判断: 游客身份跳转到登录页面
-        '''
+        #  判断: 游客身份跳转到登录页面
         if response1['body'].find('js/login.js') != -1:
             return (True, response1['body'])
 
-
+        # print response1['body']
         # 订单页取出addressId,获取addressId的值
         value = 'window.addressId = '
         index = response1['body'].find(value)
         if index == -1:
             return (False, '')
-        # print index
+        # print index, len(value)
         add_index = index + len(value)
-        for i in response1['body'][add_index]:
+        for i in response1['body'][add_index:]:
             if i == ';':
                 break
             add_index += 1
+        # print add_index
         # print response1['body'][(index+len(value)):add_index]
         addressId = response1['body'][(index+len(value)):add_index]
         print addressId
-
+        
 
         # 订单确认页，设置不使用红包
         param = {'bonus_id':0}
         response = self.session.get('/checkoutBonus.html?' + urllib.urlencode(param))
         print urllib.urlencode(param)
         # print response
+        result = False
 
 
         # 去支付，请求vdone页

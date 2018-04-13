@@ -140,7 +140,7 @@ class timeShop_getCart_buy(unittest.TestCase):
             return (False, '')
         # print index
         add_index = index + len(value)
-        for i in response1['body'][add_index]:
+        for i in response1['body'][add_index:]:
             if i == ';':
                 break
             add_index += 1
@@ -154,6 +154,7 @@ class timeShop_getCart_buy(unittest.TestCase):
         response = self.session.get('/checkoutBonus.html?' + urllib.urlencode(param))
         print urllib.urlencode(param)
         # print response
+        result = False
 
 
         # 去支付,请求vode页
