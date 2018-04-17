@@ -201,7 +201,7 @@ class search_buyGoods_pay(unittest.TestCase):
         soup = BeautifulSoup(response1['body'], 'html.parser')
         confirm = soup.find_all("div", class_='confirm_tips')
         # print confirm[0]
-        confirm_money = confirm[0].find("span").get_text()
+        confirm_money = confirm[0].find("span").get_text() 
         print u'返现金额:', confirm_money
 
         # 订单确认页，设置不使用红包
