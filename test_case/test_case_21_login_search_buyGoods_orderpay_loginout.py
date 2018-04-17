@@ -111,8 +111,8 @@ class search_buyGoods_pay(unittest.TestCase):
         dataList = extra['dataList'][0]
         sales = dataList['sales']['goodsStocks']
         status = dataList['status']['onSale']
-        print u'goodsStocks:', sales
-        print u'onSale:', status
+        print u'商品库存:', sales
+        print u'是否在售:', status
      
 
         # 请求订单确认页
@@ -182,12 +182,19 @@ class search_buyGoods_pay(unittest.TestCase):
         soup = BeautifulSoup(response1['body'], 'html.parser')
         goods_prices = soup.find_all("div", class_='good_price')
         # print goods_prices
-        goods_price_spans= goods_prices[0].find_all("span")[-1]
-        print goods_price_spans
-        good_num = goods_price_spans[0].find("span").get_text()
-        print good_num
-        # goods_nums = goods_price_spans[goods_prices.find(goods_price_spans)+1:].strip()
-        # print goods_nums
+        goods_price_spans= goods_prices[0].find_all("span")
+        goods_number = goods_price_spans[-1].get_text().strip()
+        number = 0
+        number_index = goods_number.find(' ')
+        if number_index == -1:
+            return False
+        for char in goods_number[number_index+1:]:
+            if char == ' ':
+                number_index += 1
+            else:
+                break
+        number = goods_number[number_index+1:]
+        print u'商品数量:', number
 
         # 订单确认页，取出返现金额
         result = False
@@ -205,7 +212,7 @@ class search_buyGoods_pay(unittest.TestCase):
 
         # 去支付,请求vdone页
         print u'订单确认页生成订单'
-        param = {'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard':idcard}
+        param = {'goods[0][id]': str(goodsId), 'goods[0][number]':number, 'goods[0][price]': goods_price, 'goods[0][act_id]':0, 'goods[0][act_stime]':0, 'goods[0][act_etime]':0, 'goods[0][price_act_id]':0, 'goods[0][price_act_type]':0, 'goods[0][income]':confirm_money, 'goods[0][pay_start_time]':0, 'goods[0][pay_start_time_format]':0, 'goods[0][pay_end_time]':0, 'goods[0][discount_price]':0, 'goods[0][advance_price]':0, 'goods[0][advance_price_one]':0,'goods[0][end_price]':0, 'goods[0][limit_num]':0, 'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard':idcard}
         response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + urllib.urlencode(param))
         print urllib.urlencode(param)
         print response['body']
