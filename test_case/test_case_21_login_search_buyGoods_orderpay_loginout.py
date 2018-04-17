@@ -12,6 +12,7 @@ import urllib,urllib2
 import csv
 import json
 import re
+import urlparse
 import random
 import sys
 reload(sys)
@@ -241,12 +242,18 @@ class search_buyGoods_pay(unittest.TestCase):
         print u'status_code:', response.status_code
         # print response.text
         
-        # 取出pay_url链接中的order_id
+        # 取出pay_url,取出pay_url的order_id
         result = False
         soup = BeautifulSoup(response.text, 'html.parser')
         cashier_pay_type = soup.find_all('div', class_='cashier_pay_type')
-        print cashier_pay_type[0]
-        
+        k = cashier_pay_type[0]
+        for k in cashier_pay_type[0].find_all('a'):
+            print (k['href'])
+            url = k['href']
+            # https://18600967174.davdian.com/index.php?c=AgentPay&a=index&order_id=31342469
+            order_id = re.findall(r'\d+', url)[-1]
+            print u'order_id:', order_id
+            
         return True
 
 
