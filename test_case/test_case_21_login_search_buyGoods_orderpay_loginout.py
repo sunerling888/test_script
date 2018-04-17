@@ -225,6 +225,28 @@ class search_buyGoods_pay(unittest.TestCase):
                 return False
             
             print "SUCEESS! [status not 0][status:%s][message:%s]" % (s['status'], s['msg'])
+
+        # 取出vode页的跳转支付url
+        p = json.loads(response['body'])
+        # print pay
+        if 'url' not in p:
+            return False
+        pay_url = p['url']
+        print pay_url
+
+
+        # 请求跳转支付url
+        url = pay_url
+        response = requests.get(pay_url)
+        print u'status_code:', response.status_code
+        # print response.text
+        
+        # 取出pay_url链接中的order_id
+        result = False
+        soup = BeautifulSoup(response.text, 'html.parser')
+        cashier_pay_type = soup.find_all('div', class_='cashier_pay_type')
+        print cashier_pay_type[0]
+        
         return True
 
 
