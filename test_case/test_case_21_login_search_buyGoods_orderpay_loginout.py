@@ -44,11 +44,39 @@ class search_buyGoods_pay(unittest.TestCase):
     def tearDown(self):
         print u'-----测试结束-----'
         self.session.api('/api/mg/auth/user/logout')
+    '''
+    # 抽离下面的步骤成方法，下面调用   【多次用到的方法放在lib公用里，不是多次用到的放到tearDown下面】
+    def actionSearch(self):
+        pass
 
+    def actionDetail(self):
+        pass
+
+    def actionVdone(self):
+        #need isSeller
+        pass
+
+    def action(self, handler):
+        #search
+        self.actionSearch()
+
+        #detail
+        self.actionDetail()
+
+        #addCart
+
+        #confirm
+
+        #vdone
+        self.actionVdone()
+
+        #pay
+        pass
+    '''
 
     # ============测试case================
     '''以下是:搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 支付vdone -> 完成支付'''
-    def action_search_buyGoods_pay(self, keywords=None):
+    def action_search_buyGoods_pay(self, keywords=None, isSeller=None):
 
         # 请求首页搜索
         print u'首页搜索'
@@ -56,8 +84,6 @@ class search_buyGoods_pay(unittest.TestCase):
         self.assertEqual(int(data['code']), 0, data['data'])
         # print json.dumps(data)
 
-        
-        # 请求搜索结果
         print u'搜索结果'
         param = {'keywords':keywords['keywords'], 'h5Platform': keywords['h5Platform'], 'pageIndex': keywords['pageIndex'], 'pageSize': keywords['pageSize'], 'sort': keywords['sort']}
         data = self.session.api('/api/mg/sale/search/getGoods', param)
@@ -197,13 +223,19 @@ class search_buyGoods_pay(unittest.TestCase):
         number = goods_number[number_index+1:]
         print u'商品数量:', number
 
-        # 订单确认页，取出返现金额
+        # 订单确认页，取出goods里value
         result = False
         soup = BeautifulSoup(response1['body'], 'html.parser')
-        confirm = soup.find_all("div", class_='confirm_tips')
-        # print confirm[0]
-        confirm_money = confirm[0].find("span").get_text() 
-        print u'返现金额:', confirm_money
+        confirm = soup.find_all("input", id='goods')
+        value = confirm[0].attrs['value']
+        # 判断卖家/买家/游客    卖家有confirm_money、买家/游客没有confirm_money
+        '''
+        if isSeller:
+            confirm_money = confirm[0].find("span").get_text()
+            print u'返现金额:', confirm_money
+        else:
+            confirm_money = 0
+        '''
 
         # 订单确认页，设置不使用红包
         param = {'bonus_id':0}
@@ -213,8 +245,8 @@ class search_buyGoods_pay(unittest.TestCase):
 
         # 去支付,请求vdone页
         print u'订单确认页生成订单'
-        param = {'goods[0][id]': str(goodsId), 'goods[0][number]':number, 'goods[0][price]': goods_price, 'goods[0][act_id]':0, 'goods[0][act_stime]':0, 'goods[0][act_etime]':0, 'goods[0][price_act_id]':0, 'goods[0][price_act_type]':0, 'goods[0][income]':confirm_money, 'goods[0][pay_start_time]':0, 'goods[0][pay_start_time_format]':0, 'goods[0][pay_end_time]':0, 'goods[0][discount_price]':0, 'goods[0][advance_price]':0, 'goods[0][advance_price_one]':0,'goods[0][end_price]':0, 'goods[0][limit_num]':0, 'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard':idcard}
-        response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + urllib.urlencode(param))
+        #param = {'goods[0][id]': str(goodsId), 'goods[0][number]':number, 'goods[0][price]': goods_price, 'goods[0][act_id]':0, 'goods[0][act_stime]':0, 'goods[0][act_etime]':0, 'goods[0][price_act_id]':0, 'goods[0][price_act_type]':0, 'goods[0][income]':confirm_money, 'goods[0][pay_start_time]':0, 'goods[0][pay_start_time_format]':0, 'goods[0][pay_end_time]':0, 'goods[0][discount_price]':0, 'goods[0][advance_price]':0, 'goods[0][advance_price_one]':0,'goods[0][end_price]':0, 'goods[0][limit_num]':0, 'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard':idcard}
+        response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + value + '&address_id='+addressId+'&password=&commission=0')
         print urllib.urlencode(param)
         print response['body']
 
@@ -260,11 +292,26 @@ class search_buyGoods_pay(unittest.TestCase):
 
     # ============执行case==============
     def test_01_seller_search_buyGoods_pay(self):
-        print u'卖家身份:'
+        print u'卖家身份: 登录 -> 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 去支付 -> 生成订单(取出order_id)'
         user = self.users.next()
         self.session.api('/api/mg/auth/user/login', user)
         query = self.searchs.random()
-        ret = self.action_search_buyGoods_pay(query)
+        ret = self.action_search_buyGoods_pay(query, True)
         self.assertTrue(ret)
 
+    
+    def test_02_user_search_buyGoods_pay(self):
+        print u'买家身份: 登录 -> 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 去支付 -> 生成订单(取出order_id)'
+        user = self.users.next()
+        self.session.api('/api/mg/auth/user/login', user)
+        query = self.searchs.random()
+        ret = self.action_search_buyGoods_pay(query, False)
+        self.assertTrue(ret)
+
+    
+    def test_03_no_search_buyGoods_pay(self):
+        print u'游客身份: 搜索商品 -> 商品详情页 -> 立即购买 -> 订单确认页 -> 去支付 -> 登录(判断是否跳到登录页)'
+        query = self.searchs.random()
+        ret = self.action_search_buyGoods_pay(query, False)
+        self.assertTrue(ret)
 
