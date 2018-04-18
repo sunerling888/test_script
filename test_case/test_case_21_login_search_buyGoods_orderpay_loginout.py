@@ -246,7 +246,7 @@ class search_buyGoods_pay(unittest.TestCase):
         # 去支付,请求vdone页
         print u'订单确认页生成订单'
         #param = {'goods[0][id]': str(goodsId), 'goods[0][number]':number, 'goods[0][price]': goods_price, 'goods[0][act_id]':0, 'goods[0][act_stime]':0, 'goods[0][act_etime]':0, 'goods[0][price_act_id]':0, 'goods[0][price_act_type]':0, 'goods[0][income]':confirm_money, 'goods[0][pay_start_time]':0, 'goods[0][pay_start_time_format]':0, 'goods[0][pay_end_time]':0, 'goods[0][discount_price]':0, 'goods[0][advance_price]':0, 'goods[0][advance_price_one]':0,'goods[0][end_price]':0, 'goods[0][limit_num]':0, 'order_id':0, 'bonus_id':0, 'address_id':addressId, 'commission':0, 'idcard':idcard}
-        response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + value + '&address_id='+addressId+'&password=&commission=0')
+        response = self.session.get('/vdone.html?rp=checkout&rl=next' + '&' + value + '&address_id='+ addressId + '&password=&commission=0')
         print urllib.urlencode(param)
         print response['body']
 
