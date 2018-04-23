@@ -12,6 +12,7 @@ Python nose
     1.5 test_report     测试报告
     1.6 redis_info      监听脚本
     1.7 redis_log       监听脚本log
+>
 
 
 
